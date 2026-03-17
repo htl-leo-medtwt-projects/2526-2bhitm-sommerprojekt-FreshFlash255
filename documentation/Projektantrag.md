@@ -34,7 +34,7 @@ So reich wie es nur geht zu werden, indem man weitere Locations freischaltet und
 
 ### 3.1 Genre
 
-Tycoon Game
+Tycoon Game/Progression Game
 
 ### 3.2 Story
 
