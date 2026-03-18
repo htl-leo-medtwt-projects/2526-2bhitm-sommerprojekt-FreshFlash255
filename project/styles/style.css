@@ -1,0 +1,33 @@
+@font-face {
+    font-family: Pixeled;
+    src: url('../fonts/Pixeled.ttf');
+}
+
+body {
+    font-family: 'Pixeled';
+    margin: 0;
+    height: 100vh;
+}
+
+.startScreen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../img/bg/bg3.png');
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    gap:1rem;
+}
+
+.startMenuButton {
+    cursor: pointer;
+    width: 20%;
+    image-rendering:pixelated;
+}
+
+.startMenuButton > img{
+    width: 100%;
+}
