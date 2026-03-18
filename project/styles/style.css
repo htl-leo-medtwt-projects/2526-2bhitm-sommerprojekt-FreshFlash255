@@ -7,6 +7,30 @@ body {
     font-family: 'Pixeled';
     margin: 0;
     height: 100vh;
+    overflow: hidden;
+    /* user-select: none; */
+}
+
+.fullscreenButton {
+    position: absolute;
+    width: 4rem;
+    top: 0.5rem;
+    left: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.fullscreenButton:hover {
+    transform: scale(1.05);
+}
+
+.fullscreenButton > img {
+    width: 100%;
+}
+
+.gameLogo {
+    width: 40%;
+    padding-top: 2vh;
 }
 
 .startScreen {
@@ -19,15 +43,20 @@ body {
     background-size: cover;
     height: 100%;
     width: 100%;
-    gap:1rem;
+    gap: 1rem;
 }
 
 .startMenuButton {
     cursor: pointer;
-    width: 20%;
+    width: 25%;
+    transition: all 0.3s ease;
     image-rendering:pixelated;
 }
 
 .startMenuButton > img{
     width: 100%;
+}
+
+.startMenuButton:hover {
+    transform: scale(1.05);
 }
