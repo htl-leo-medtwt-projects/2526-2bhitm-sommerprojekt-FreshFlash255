@@ -8,6 +8,7 @@ body {
     margin: 0;
     height: 100vh;
     overflow: hidden;
+    scrollbar-width: none;
     /* user-select: none; */
 }
 
@@ -53,10 +54,47 @@ body {
     image-rendering:pixelated;
 }
 
-.startMenuButton > img{
+.startMenuButton img{
     width: 100%;
 }
 
 .startMenuButton:hover {
     transform: scale(1.05);
+}
+
+.settingsScreen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding-top: 3rem;
+    background-image: url('../img/bg/bg3.png');
+    background-position: center;
+    background-size: cover;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+.tutorialScreen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding-top: 3rem;
+    background-image: url('../img/bg/bg3.png');
+    background-position: center;
+    background-size: cover;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+.contentWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    margin-bottom: 4rem;
 }

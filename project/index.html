@@ -12,12 +12,16 @@
     <section class="startScreen" id="startScreen">
         <div class="fullscreenButton" id="fullscreenButton" onclick="toggleFullscreen()"><img src="img/fullscreenButton.png"></div>
         <img class="gameLogo" id="gameLogo" src="img/logo/logo2.png">
-        <div class="startMenuButton" id="startButton" onclick=""><img src="img/PlayButton.png"></div>
-        <div class="startMenuButton" id="settingsButton" onclick=""><img src="img/SettingsButton.png"></div>
-        <div class="startMenuButton" id="tutorialButton" onclick=""><img src="img/TutorialButton.png"></div>
+        <div class="startMenuButton" id="startButton" onclick="onStartButtonClick()"><img src="img/PlayButton.png"></div>
+        <div class="startMenuButton" id="settingsButton" onclick="onSettingsButtonClick()"><img src="img/SettingsButton.png"></div>
+        <div class="startMenuButton" id="tutorialButton" onclick="onTutorialButtonClick()"><img src="img/TutorialButton.png"></div>
     </section>
-    <section class="settingsScreen" id="settingsScreen"></section>
-    <section class="tutorialScreen" id="tutorialScreen"></section>
+    <section class="settingsScreen" id="settingsScreen">
+        <div class="contentWrapper" id="contentWrapperSettings"><img src="img/menuBg.png"></div>
+    </section>
+    <section class="tutorialScreen" id="tutorialScreen">
+        <div class="contentWrapper" id="contentWrapperSettings"><img src="img/menuBg.png"></div>
+    </section>
     <section class="gameScreen" id="gameScreen"></section>
     <section class="inventoryScreen" id="inventoryScreen"></section>
     <section class="pcScreen" id="pcScreen">

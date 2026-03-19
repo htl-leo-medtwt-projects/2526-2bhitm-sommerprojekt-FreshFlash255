@@ -1,36 +1,93 @@
+/// <reference path="mainScript.js" />
+
+const SCREENS = {
+    startScreen: document.getElementById('startScreen'),
+    settingsScreen: document.getElementById('settingsScreen'),
+    tutorialScreen: document.getElementById('tutorialScreen'),
+    gameScreen: document.getElementById('gameScreen'),
+    inventoryScreen: document.getElementById('inventoryScreen'),
+    pcScreen: {
+        main: document.getElementById('pcScreen'),
+        home: document.getElementById('pcHomeScreen'),
+        sell: document.getElementById('pcSellScreen'),
+        shop: document.getElementById('pcShopScreen'),
+        energy: document.getElementById('pcEnergyScreen')
+    }
+}
+
+
 //NUR Funktionsnamen KI Generiert
 
 
 // === UI / Navigation ===
-function toggleFullscreen() {}
+// Fullscreen ein/aus toggeln(Claude KI benutzt)
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+    //document.getElementById('fullscreenButton').style.display = 'none'
+  } else {
+    document.exitFullscreen();
+    //document.getElementById('fullscreenButton').style.display = 'block'
+  }
+}
 function showScreen(screenId) {}
 function hideScreen(screenId) {}
-function hideAllScreens() {}
+// KI Assistenz
+function hideAllScreens() {
+    Object.entries(SCREENS).forEach(([key, value]) => {     // Wird in js Array umgewandelt, Key = z.B. "StartScreen" und value was darin ist
+        if (value instanceof HTMLElement) {     //instanceof checkt Typ des Objekts/der Klasse
+            value.style.display = 'none';
+        } else if (typeof value === "object" && (value != null || value)) {   //typeof checkt Typ der Variable
+            Object.entries(value).forEach(([innerKey, innerValue]) => {
+                if (innerValue instanceof HTMLElement) {
+                    innerValue.style.display = 'none';
+                }
+            });
+        } else {
+            console.warn('Variable "SCREENS" corrupted', SCREENS);
+        }
+    });
+}
 
 // === Start Screen ===
-function onStartButtonClick() {}
-function onSettingsButtonClick() {}
-function onTutorialButtonClick() {}
+function onStartButtonClick() {
+    startGame();
+}
+function onSettingsButtonClick() {
+    openSettings();
+}
+function onTutorialButtonClick() {
+    openTutorial();
+}
 
 // === Settings Screen ===
-function openSettings() {}
-function closeSettings() {}
+function openSettings() {
+    hideAllScreens();
+    SCREENS.settingsScreen.style.display = "flex";
+}
 function saveSettings() {}
 
 // === Tutorial Screen ===
-function openTutorial() {}
-function closeTutorial() {}
+function openTutorial() {
+    hideAllScreens();
+    SCREENS.tutorialScreen.style.display = "flex";
+}
 
 // === Game Screen ===
-function startGame() {}
+function startGame() {
+    hideAllScreens()
+    SCREENS.gameScreen.style.display = "block"
+}
 // function pauseGame() {}
 // function resumeGame() {}
 function endGame() {}
 function updateGameUI() {}
 
 // === Inventory Screen ===
-function openInventory() {}
-function closeInventory() {}
+function openInventory() {
+    hideAllScreens();
+    SCREENS.inventoryScreen.style.display = "block";
+}
 function renderInventory() {}
 function addItemToInventory(item) {}
 function removeItemFromInventory(itemId) {}
@@ -54,19 +111,3 @@ function buyItem(itemId) {}
 function showPCEnergy() {}
 function buyEnergy(amount) {}
 function updateEnergyDisplay() {}
-
-
-
-
-
-
-// Fullscreen ein/aus toggeln(Claude KI benutzt)
-function toggleFullscreen() {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen();
-    //document.getElementById('fullscreenButton').style.display = 'none'
-  } else {
-    document.exitFullscreen();
-    //document.getElementById('fullscreenButton').style.display = 'block'
-  }
-}
