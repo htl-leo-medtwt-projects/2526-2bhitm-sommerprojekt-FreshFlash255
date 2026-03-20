@@ -6,10 +6,11 @@
 body {
     font-family: 'Pixeled';
     margin: 0;
+    color: #fff;
     height: 100vh;
     overflow: hidden;
     scrollbar-width: none;
-    /* user-select: none; */
+    user-select: none;
 }
 
 .fullscreenButton {
@@ -32,6 +33,23 @@ body {
 .gameLogo {
     width: 40%;
     padding-top: 2vh;
+}
+
+.backButton {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    width: 7rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.backButton:hover {
+    transform: scale(1.1);
+}
+
+.backButton img {
+    width: 100%;
 }
 
 .startScreen {
@@ -82,7 +100,7 @@ body {
     align-items: center;
     height: 100%;
     width: 100%;
-    padding-top: 3rem;
+    padding-top: 2rem;
     background-image: url('../img/bg/bg3.png');
     background-position: center;
     background-size: cover;
@@ -95,6 +113,27 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 80%;
+    background-image: url('../img/menuBg.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 50%;
+    height: 3000px;
+    padding-top: 4.5rem;
     margin-bottom: 4rem;
+}
+
+.contentWrapper img {
+    position: relative;
+    height: 100%;
+    top: 0;
+}
+
+.contentWrapper p {
+    font-size: 14px;
+    padding-left: 7rem;
+    padding-right: 7rem;
+}
+
+.contentWrapper div {
+    height: 10rem;
 }

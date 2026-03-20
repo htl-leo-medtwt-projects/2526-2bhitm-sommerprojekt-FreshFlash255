@@ -17,10 +17,41 @@
         <div class="startMenuButton" id="tutorialButton" onclick="onTutorialButtonClick()"><img src="img/TutorialButton.png"></div>
     </section>
     <section class="settingsScreen" id="settingsScreen">
-        <div class="contentWrapper" id="contentWrapperSettings"><img src="img/menuBg.png"></div>
+        <div class="backButton" id="backButton"><img src="img/exitButton.png" onclick="openStartScreen()"></div>
+        <div class="contentWrapper" id="contentWrapperSettings"></div>
     </section>
     <section class="tutorialScreen" id="tutorialScreen">
-        <div class="contentWrapper" id="contentWrapperSettings"><img src="img/menuBg.png"></div>
+        <div class="backButton" id="backButton"><img src="img/exitButton.png" onclick="openStartScreen()"></div>
+        <div class="contentWrapper" id="contentWrapperSettings">
+            <h1>Tutorial</h1>
+            <p>Gameplay-Uebersicht<br>
+                Du baust und betreibst Racks mit Grafikkarten, die Bitcoins farmen<br>
+                Alle Aktionen erfolgen ueber den PC<br>
+                Die Kryptowaehrungskurse aendern sich waehrend des Spiels<br>
+                Grundlegende Ablaeufe<br>
+                Kauf von Komponenten (am PC):<br>
+                Grafikkarten kaufen<br>
+                Diese in die Racks einbauen<br>
+                Grafikkarten austauschen:<br>
+                Alte Grafikkarten aus den Racks entfernen<br>
+                Neue (bessere/effizientere) Grafikkarten einbauen<br>
+                Dies fuehrt zu hoeherer Bitcoin-Produktion<br>
+                Bitcoin-Farming:<br>
+                Die Grafikkarten in den Racks produzieren Bitcoins<br>
+                Die Produktion laeuft kontinuierlich ab<br>
+                Verkauf (am PC):<br>
+                Bitcoins verkaufen<br>
+                Der Verkaufskurs variiert (Kurs aendert sich)<br>
+                Kurs-Mechanic:<br>
+                Der Kurs fuer Kryptowaehrungen ist dynamisch<br>
+                Du entscheidest, wann du verkaufst (guenstig oder teuer)<br>
+                Ziel<br>
+                Bitcoins farmen<br>
+                Zum richtigen Zeitpunkt verkaufen<br>
+                Mit dem Gewinn bessere Grafikkarten kaufen<br>
+                Mehr Gewinn machen</p>
+                <div></div>
+        </div>
     </section>
     <section class="gameScreen" id="gameScreen"></section>
     <section class="inventoryScreen" id="inventoryScreen"></section>
@@ -30,5 +61,6 @@
         <section class="pcShopScreen" id="pcShopScreen"></section>
         <section class="pcEnergyScreen" id="pcEnergyScreen"></section>
     </section>
+    <section class="loadingScreen" id="loadingScreen"></section>
 </body>
 </html>

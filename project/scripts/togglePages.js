@@ -17,8 +17,6 @@ const SCREENS = {
 
 
 //NUR Funktionsnamen KI Generiert
-
-
 // === UI / Navigation ===
 // Fullscreen ein/aus toggeln(Claude KI benutzt)
 function toggleFullscreen() {
@@ -49,6 +47,13 @@ function hideAllScreens() {
     });
 }
 
+// === Loading Screen
+
+async function showLoadingScreen() {
+    
+}
+
+
 // === Start Screen ===
 function onStartButtonClick() {
     startGame();
@@ -58,6 +63,11 @@ function onSettingsButtonClick() {
 }
 function onTutorialButtonClick() {
     openTutorial();
+}
+
+function openStartScreen() {
+    hideAllScreens()
+    SCREENS.startScreen.style.display = "flex";
 }
 
 // === Settings Screen ===
@@ -93,11 +103,20 @@ function addItemToInventory(item) {}
 function removeItemFromInventory(itemId) {}
 
 // === PC Screen ===
-function openPC() {}
-function closePC() {}
+function openPC() {
+    hideAllScreens()
+    SCREENS.pcScreen.main.style.display = "block"
+    SCREENS.inventoryScreen.style.display = "block"
+}
+function closePC() {
+    hideAllScreens()
+    SCREENS.gameScreen.style.display = "block"
+}
 
 // === PC – Home ===
-function showPCHome() {}
+function showPCHome() {
+    SCREENS.inventoryScreen.style.display = "block"
+}
 
 // === PC – Sell ===
 function showPCSell() {}
@@ -111,3 +130,13 @@ function buyItem(itemId) {}
 function showPCEnergy() {}
 function buyEnergy(amount) {}
 function updateEnergyDisplay() {}
+
+
+
+
+// === INIT ===
+function init() {
+    showLoadingScreen()
+    hideAllScreens()
+    openStartScreen()
+}
