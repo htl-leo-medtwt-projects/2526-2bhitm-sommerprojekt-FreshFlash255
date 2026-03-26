@@ -12,7 +12,8 @@ const SCREENS = {
         sell: document.getElementById('pcSellScreen'),
         shop: document.getElementById('pcShopScreen'),
         energy: document.getElementById('pcEnergyScreen')
-    }
+    },
+    loadingScreen: document.getElementById('loadingScreen')
 }
 
 
@@ -50,7 +51,11 @@ function hideAllScreens() {
 // === Loading Screen
 
 async function showLoadingScreen() {
-    
+        hideAllScreens()
+        SCREENS.loadingScreen.style.display = "block"
+        setTimeout(() => {
+        openStartScreen()
+    }, 2000)
 }
 
 
@@ -137,6 +142,7 @@ function updateEnergyDisplay() {}
 // === INIT ===
 function init() {
     showLoadingScreen()
-    hideAllScreens()
-    openStartScreen()
+    
 }
+
+init()
