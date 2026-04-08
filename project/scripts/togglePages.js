@@ -50,7 +50,7 @@ function hideAllScreens() {
 
 // === Loading Screen
 
-async function showLoadingScreen() {
+function showLoadingScreen() {
         hideAllScreens()
         SCREENS.loadingScreen.style.display = "block"
         setTimeout(() => {
@@ -110,29 +110,47 @@ function removeItemFromInventory(itemId) {}
 // === PC Screen ===
 function openPC() {
     hideAllScreens()
-    SCREENS.pcScreen.main.style.display = "block"
-    SCREENS.inventoryScreen.style.display = "block"
+    SCREENS.pcScreen.main.style.display = "flex"
 }
 function closePC() {
     hideAllScreens()
+    showPCHome()
     SCREENS.gameScreen.style.display = "block"
 }
 
 // === PC – Home ===
 function showPCHome() {
-    SCREENS.inventoryScreen.style.display = "block"
+    SCREENS.pcScreen.home.classList.add('sidebarActive')
+    SCREENS.pcScreen.sell.classList.remove('sidebarActive')
+    SCREENS.pcScreen.shop.classList.remove('sidebarActive')
+    SCREENS.pcScreen.energy.classList.remove('sidebarActive')
 }
 
 // === PC – Sell ===
-function showPCSell() {}
+function showPCSell() {
+    SCREENS.pcScreen.home.classList.remove('sidebarActive')
+    SCREENS.pcScreen.sell.classList.add('sidebarActive')
+    SCREENS.pcScreen.shop.classList.remove('sidebarActive')
+    SCREENS.pcScreen.energy.classList.remove('sidebarActive')
+}
 function sellItem(itemId) {}
 
 // === PC – Shop ===
-function showPCShop() {}
+function showPCShop() {
+    SCREENS.pcScreen.home.classList.remove('sidebarActive')
+    SCREENS.pcScreen.sell.classList.remove('sidebarActive')
+    SCREENS.pcScreen.shop.classList.add('sidebarActive')
+    SCREENS.pcScreen.energy.classList.remove('sidebarActive')
+}
 function buyItem(itemId) {}
 
 // === PC – Energy ===
-function showPCEnergy() {}
+function showPCEnergy() {
+    SCREENS.pcScreen.home.classList.remove('sidebarActive')
+    SCREENS.pcScreen.sell.classList.remove('sidebarActive')
+    SCREENS.pcScreen.shop.classList.remove('sidebarActive')
+    SCREENS.pcScreen.energy.classList.add('sidebarActive')
+}
 function buyEnergy(amount) {}
 function updateEnergyDisplay() {}
 
@@ -141,8 +159,7 @@ function updateEnergyDisplay() {}
 
 // === INIT ===
 function init() {
-    showLoadingScreen()
-    
+    //showLoadingScreen()
 }
 
 init()
