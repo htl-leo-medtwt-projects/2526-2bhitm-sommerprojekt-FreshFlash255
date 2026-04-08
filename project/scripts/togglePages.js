@@ -11,7 +11,8 @@ const SCREENS = {
         home: document.getElementById('pcHomeScreen'),
         sell: document.getElementById('pcSellScreen'),
         shop: document.getElementById('pcShopScreen'),
-        energy: document.getElementById('pcEnergyScreen')
+        energy: document.getElementById('pcEnergyScreen'),
+        backButton: document.getElementById('backButtonPc')
     },
     loadingScreen: document.getElementById('loadingScreen')
 }
@@ -108,11 +109,11 @@ function addItemToInventory(item) {}
 function removeItemFromInventory(itemId) {}
 
 // === PC Screen ===
-function openPC() {
+function openPc() {
     hideAllScreens()
     SCREENS.pcScreen.main.style.display = "flex"
 }
-function closePC() {
+function closePc() {
     hideAllScreens()
     showPCHome()
     SCREENS.gameScreen.style.display = "block"

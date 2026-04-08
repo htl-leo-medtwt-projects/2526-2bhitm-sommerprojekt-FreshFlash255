@@ -55,22 +55,37 @@
     </section>
     <section class="gameScreen" id="gameScreen">
         <div class="building" id="building">
-            <div class="pcDesk" id="pcDesk"><img onclick="openPC()" src="img/desk.png"></div>
-            <div class="rackContainer" id="rackContainer"></div>
+            <div class="pcDesk" id="pcDesk"><img onclick="openPc()" src="img/desk.png"></div>
+            <div class="rackContainer" id="rackContainer"><img onclick="openInventory()" src="img/Racks.png"></div>
         </div>
     </section>
-    <section class="inventoryScreen" id="inventoryScreen"></section>
-    <section class="pcScreen" id="pcScreen">
-        <div class="sidebar" id="sidebar">
-            <div class="sidebarBtn sidebarActive" id="sidebarBtnHome" onclick="showPcHome()">Home</div>
-            <div class="sidebarBtn" id="sidebarBtnSell" onclick="showPcSell()">Sell</div>
-            <div class="sidebarBtn" id="sidebarBtnShop" onclick="showPcShop()">Shop</div>
-            <div class="sidebarBtn" id="sidebarBtnEnergy" onclick="showPcEnergy()">Energy</div>
+    <section class="inventoryScreen" id="inventoryScreen">
+        <div class="backButton" id="backButtonInventory"><img src="img/exitButton.png" onclick="startGame()"></div>
+        <div class="inventoryWrapper">
+            <div class="playerInventory"></div>
+            <div class="rackInventory"></div>
         </div>
-        <section class="pcHomeScreen" id="pcHomeScreen"></section>
-        <section class="pcSellScreen" id="pcSellScreen"></section>
-        <section class="pcShopScreen" id="pcShopScreen"></section>
-        <section class="pcEnergyScreen" id="pcEnergyScreen"></section>
+    </section>
+    <section class="pcScreen" id="pcScreen">
+        <div class="backButton" id="backButtonPc"><img src="img/exitButton.png" onclick="closePc()"></div>
+        <div class="pcWrapper">
+            <div class="sidebar" id="sidebar">
+                <div class="sidebarBtn sidebarActive" id="sidebarBtnHome" onclick="showPcHome()">Home</div>
+                <div class="sidebarBtn" id="sidebarBtnSell" onclick="showPcSell()">Sell</div>
+                <div class="sidebarBtn" id="sidebarBtnShop" onclick="showPcShop()">Shop</div>
+                <div class="sidebarBtn" id="sidebarBtnEnergy" onclick="showPcEnergy()">Energy</div>
+            </div>
+            <section class="pcHomeScreen" id="pcHomeScreen">
+                <canvas class="" id=""></canvas>
+                <canvas class="" id=""></canvas>
+                <div class="" id=""></div>
+            </section>
+            <section class="pcSellScreen" id="pcSellScreen">
+                <div class="" id=""></div>
+            </section>
+            <section class="pcShopScreen" id="pcShopScreen"></section>
+            <section class="pcEnergyScreen" id="pcEnergyScreen"></section>
+        </div>
     </section>
     <section class="loadingScreen" id="loadingScreen">
         <img class="loadingBg" id="loadingBg" src="img/bg/bg3.png">
