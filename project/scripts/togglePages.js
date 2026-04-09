@@ -6,13 +6,13 @@ const SCREENS = {
     tutorialScreen: document.getElementById('tutorialScreen'),
     gameScreen: document.getElementById('gameScreen'),
     inventoryScreen: document.getElementById('inventoryScreen'),
+    backButton: document.querySelectorAll('.backButton'),
     pcScreen: {
         main: document.getElementById('pcScreen'),
         home: document.getElementById('pcHomeScreen'),
         sell: document.getElementById('pcSellScreen'),
         shop: document.getElementById('pcShopScreen'),
         energy: document.getElementById('pcEnergyScreen'),
-        backButton: document.getElementById('backButtonPc')
     },
     loadingScreen: document.getElementById('loadingScreen')
 }
