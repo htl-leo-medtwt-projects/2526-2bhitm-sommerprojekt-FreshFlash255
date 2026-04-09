@@ -1,8 +1,8 @@
 # Update Sprint #1
 
-**Name:** Leonard Breuer
-**Klasse:** 2BHITM
-**Projekt:** Minemasters
+**Name:** Leonard Breuer<br>
+**Klasse:** 2BHITM<br>
+**Projekt:** Minemasters<br>
 
 ## Änderungen
 
@@ -17,6 +17,7 @@
 ## Ziele bis zum nächsten Sprint:
 
 - Bug mit backbutton fixen
-- Funktionierendes Inventory + Shop
+- Inventory + Shop Struktur
+- PcSreen und Inventory Ordentlich designen
 - Spieldaten in json vorhanden
 - Kernmechanik soll Funktionieren

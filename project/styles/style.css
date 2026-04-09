@@ -275,6 +275,12 @@ body {
     z-index: 1000;
 }
 
+.inventoryWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* From Uiverse.io by Vosoone */ 
 .main-container {
     position: absolute;
