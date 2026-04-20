@@ -209,17 +209,22 @@ body {
   background-image: url('../img/Pc.png');
   background-position: center;
   background-size: cover;
+  z-index: 1001;
 }
 
 .pcWrapper {
   display: flex;
   flex-direction: row;
+  position: relative;
+  left: 25.39%;
+  top: -2.9%;
   background-image: url('../img/bg/pcBg.png');
   background-size: cover;
   background-position: center;
-  width: 80rem;
-  height: 40rem;
+  width: 55%;
+  height: 60%;
   padding: 1rem;
+  z-index: 1000;
 }
 
 .sidebar {

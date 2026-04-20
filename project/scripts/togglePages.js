@@ -6,13 +6,16 @@ const SCREENS = {
     tutorialScreen: document.getElementById('tutorialScreen'),
     gameScreen: document.getElementById('gameScreen'),
     inventoryScreen: document.getElementById('inventoryScreen'),
-    backButton: document.querySelectorAll('.backButton'),
+    backButtonSettings: document.getElementById('backButtonSettings'),
+    backButtonTutorial: document.getElementById('backButtonTutorial'),
+    backButton: document.querySelectorAll('backButton'),
     pcScreen: {
         main: document.getElementById('pcScreen'),
         home: document.getElementById('pcHomeScreen'),
         sell: document.getElementById('pcSellScreen'),
         shop: document.getElementById('pcShopScreen'),
         energy: document.getElementById('pcEnergyScreen'),
+        backButton: document.getElementById('backButtonPc'),
     },
     loadingScreen: document.getElementById('loadingScreen')
 }
@@ -34,29 +37,37 @@ function showScreen(screenId) {}
 function hideScreen(screenId) {}
 // KI Assistenz
 function hideAllScreens() {
-    Object.entries(SCREENS).forEach(([key, value]) => {     // Wird in js Array umgewandelt, Key = z.B. "StartScreen" und value was darin ist
+    Object.entries(SCREENS).forEach(([key, value]) => { // Wird in js Array umgewandelt, Key = z.B. "StartScreen" und value was darin ist
         if (value instanceof HTMLElement) {     //instanceof checkt Typ des Objekts/der Klasse
             value.style.display = 'none';
-        } else if (typeof value === "object" && (value != null || value)) {   //typeof checkt Typ der Variable
+        } else if (typeof value === "object" && (value != null || value)) { //typeof checkt Typ der Variable
             Object.entries(value).forEach(([innerKey, innerValue]) => {
                 if (innerValue instanceof HTMLElement) {
                     innerValue.style.display = 'none';
                 }
             });
+        } else if(value instanceof NodeList && (value != null || value)) {
+            value.forEach(([innerKey, innerValue]) => {
+                if(innerValue instanceof HTMLElement) {
+                    innerValue.style.display = 'none'
+                }
+            })
         } else {
             console.warn('Variable "SCREENS" corrupted', SCREENS);
         }
     });
+    if (SCREENS.pcScreen.backButton) {
+        SCREENS.pcScreen.backButton.style.display = 'none';
+    }
 }
 
-// === Loading Screen
-
+// === Loading Screen ===
 function showLoadingScreen() {
         hideAllScreens()
-        SCREENS.loadingScreen.style.display = "block"
+        SCREENS.loadingScreen.style.display = "block";
         setTimeout(() => {
         openStartScreen()
-    }, 2000)
+    }, 2000);
 }
 
 
@@ -110,13 +121,19 @@ function removeItemFromInventory(itemId) {}
 
 // === PC Screen ===
 function openPc() {
-    hideAllScreens()
-    SCREENS.pcScreen.main.style.display = "flex"
+    hideAllScreens();
+    SCREENS.pcScreen.main.style.display = "flex";
+    if (SCREENS.pcScreen.backButton) {
+        SCREENS.pcScreen.backButton.style.display = 'block';
+    }
 }
 function closePc() {
-    hideAllScreens()
-    showPCHome()
-    SCREENS.gameScreen.style.display = "block"
+    hideAllScreens();
+    showPCHome();
+    SCREENS.gameScreen.style.display = "block";
+    if (SCREENS.pcScreen.backButton) {
+        SCREENS.pcScreen.backButton.style.display = 'none';
+    }
 }
 
 // === PC – Home ===
@@ -161,6 +178,8 @@ function updateEnergyDisplay() {}
 // === INIT ===
 function init() {
     //showLoadingScreen()
+    hideAllScreens()
+    openStartScreen()
 }
 
 init()

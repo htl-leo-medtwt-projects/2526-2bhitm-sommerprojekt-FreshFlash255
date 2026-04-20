@@ -9,6 +9,7 @@
     <script src="scripts/togglePages.js" defer></script>
 </head>
 <body>
+    <!-- START SCREEN: Hauptmenü mit Logo und Buttons für Start, Einstellungen, Tutorial -->
     <section class="startScreen" id="startScreen">
         <div class="fullscreenButton" id="fullscreenButton" onclick="toggleFullscreen()"><img src="img/fullscreenButton.png"></div>
         <img class="gameLogo" id="gameLogo" src="img/logo/logo2.png">
@@ -17,13 +18,19 @@
         <div class="startMenuButton" id="tutorialButton" onclick="onTutorialButtonClick()"><img src="img/TutorialButton.png"></div>
     </section>
 
+
+
+    <!-- SETTINGS SCREEN: Einstellungen, zurück zum Startscreen -->
     <section class="settingsScreen" id="settingsScreen">
-        <div class="backButton" id="backButton"><img src="img/exitButton.png" onclick="openStartScreen()"></div>
+        <div class="backButton" id="backButtonSettings"><img src="img/exitButton.png" onclick="openStartScreen()"></div>
         <div class="contentWrapper" id="contentWrapperSettings"></div>
     </section>
 
+
+
+    <!-- TUTORIAL SCREEN: Spielanleitung und Übersicht -->
     <section class="tutorialScreen" id="tutorialScreen">
-        <div class="backButton" id="backButton"><img src="img/exitButton.png" onclick="openStartScreen()"></div>
+        <div class="backButton" id="backButtonTutorial"><img src="img/exitButton.png" onclick="openStartScreen()"></div>
         <div class="contentWrapper" id="contentWrapperSettings">
             <h1>Tutorial</h1>
             <p>Gameplay-Uebersicht<br>
@@ -56,6 +63,9 @@
         </div>
     </section>
 
+
+
+    <!-- GAME SCREEN: Hauptspiel, Gebäude, PC und Rack-Interaktion -->
     <section class="gameScreen" id="gameScreen">
         <div class="building" id="building">
             <div class="pcDesk" id="pcDesk"><img onclick="openPc()" src="img/desk.png"></div>
@@ -63,6 +73,9 @@
         </div>
     </section>
 
+
+
+    <!-- INVENTORY SCREEN: Inventar des Spielers und der Racks -->
     <section class="inventoryScreen" id="inventoryScreen">
         <div class="backButton" id="backButtonInventory"><img src="img/exitButton.png" onclick="startGame()"></div>
         <div class="inventoryWrapper">
@@ -71,6 +84,9 @@
         </div>
     </section>
 
+
+
+    <!-- PC SCREEN: PC-Interface mit Sidebar (Home, Sell, Shop, Energy) -->
     <section class="pcScreen" id="pcScreen">
         <div class="backButton" id="backButtonPc"><img src="img/exitButton.png" onclick="closePc()"></div>
         <div class="pcWrapper">
@@ -93,6 +109,9 @@
         </div>
     </section>
     
+
+    
+    <!-- LOADING SCREEN: Ladebildschirm mit Animation -->
     <section class="loadingScreen" id="loadingScreen">
         <img class="loadingBg" id="loadingBg" src="img/bg/bg3.png">
         <!-- From Uiverse.io by Vosoone --> 
