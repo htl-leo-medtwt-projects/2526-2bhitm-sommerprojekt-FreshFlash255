@@ -120,7 +120,7 @@ body {
     background-size: 100%;
     background-repeat: no-repeat;
     width: 50%;
-    height: 3000px;
+  height: 187.5rem;
     padding-top: 4.5rem;
     margin-bottom: 4rem;
 }
@@ -133,12 +133,12 @@ body {
 
 .contentWrapper p {
     font-size: 14px;
-    padding-left: 7rem;
-    padding-right: 7rem;
+  padding-left: 7rem;
+  padding-right: 7rem;
 }
 
 .contentWrapper div {
-    height: 10rem;
+  height: 10rem;
 }
 
 .gameScreen {
@@ -181,7 +181,7 @@ body {
 }
 
 .rackContainer img:hover {
-  filter: drop-shadow(0 0 10px rgba(206, 255, 168, 0.899));
+  filter: drop-shadow(0 0 0.625rem rgba(206, 255, 168, 0.899));
 }
 
 .pcDesk {
@@ -198,7 +198,7 @@ body {
 }
 
 .pcDesk img:hover {
-  filter: drop-shadow(0 0 10px rgba(255, 255, 87, 0.622));
+  filter: drop-shadow(0 0 0.625rem rgba(255, 255, 87, 0.622));
 }
 
 .pcScreen {
@@ -241,7 +241,7 @@ body {
   place-items: center;
   font-size: 1.5rem;
   border-radius: 1.25rem;
-  border: 1px solid #2B2B2B;
+  border: 0.0625rem solid #2B2B2B;
   background: #2E2E2E;
   color: #fff;
   padding: 0.2rem;
@@ -276,7 +276,7 @@ body {
 .loadingBg {
     position: absolute;
     width: 110%;
-    backdrop-filter: blur(30px);
+  backdrop-filter: blur(1.875rem);
     z-index: 1000;
 }
 
@@ -300,10 +300,87 @@ body {
 
 .inventory {
   background-color: #2B2B2B;
-  border: black solid 1px;
-  border-radius: 20px;
+  border: black solid 0.0625rem;
+  border-radius: 1.25rem;
   height: 95%;
   width: 50%;
+  padding: 1rem;
+  box-sizing: border-box;
+  color: #f2f2f2;
+  font-family: Arial, sans-serif;
+  overflow-y: auto;
+}
+
+.inventoryTitle {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 1rem;
+}
+
+.inventoryList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.inventoryItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  background: #1f1f1f;
+  border-radius: 0.75rem;
+  border: 0.0625rem solid #000;
+}
+
+.inventoryItemInfo {
+  flex: 1;
+}
+
+.inventoryItemName {
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.inventoryItemDesc {
+  font-size: 12px;
+  color: #cfcfcf;
+}
+
+.inventoryItemCount {
+  min-width: 3.125rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.inventoryActions {
+  display: flex;
+  gap: 0.375rem;
+}
+
+.inventoryActions button {
+  cursor: pointer;
+  border: 0.0625rem solid #000;
+  background: #444;
+  color: #fff;
+  border-radius: 0.375rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.inventoryActions button:hover {
+  background: #555;
+}
+
+.inventoryEmpty {
+  color: #cfcfcf;
+  font-style: italic;
+}
+
+.inventorySummary {
+  margin-top: 0.75rem;
+  font-size: 13px;
+  color: #cfcfcf;
 }
 
 /* From Uiverse.io by Vosoone */ 
@@ -312,7 +389,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(0.3125rem);
   height: 100%;
   width: 100%;
   z-index: 1001;
@@ -324,16 +401,16 @@ body {
 
 .trace-bg {
   stroke: #333;
-  stroke-width: 1.8;
+  stroke-width: 0.1125rem;
   fill: none;
 }
 
 .trace-flow {
-  stroke-width: 1.8;
+  stroke-width: 0.1125rem;
   fill: none;
   stroke-dasharray: 40 400;
   stroke-dashoffset: 438;
-  filter: drop-shadow(0 0 6px currentColor);
+  filter: drop-shadow(0 0 0.375rem currentColor);
   animation: flow 3s cubic-bezier(0.5, 0, 0.9, 1) infinite;
 }
 
@@ -372,11 +449,11 @@ body {
 
 .chip-text {
   font-weight: bold;
-  letter-spacing: 1px;
+  letter-spacing: 0.0625rem;
 }
 
 .chip-pin {
   stroke: #444;
-  stroke-width: 0.5;
-  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.6));
+  stroke-width: 0.03125rem;
+  filter: drop-shadow(0 0 0.125rem rgba(0, 0, 0, 0.6));
 }

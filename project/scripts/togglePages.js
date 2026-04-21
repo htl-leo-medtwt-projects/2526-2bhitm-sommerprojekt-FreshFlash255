@@ -104,6 +104,7 @@ function openTutorial() {
 function startGame() {
     hideAllScreens()
     SCREENS.gameScreen.style.display = "block"
+    startGameLoop();
 }
 // function pauseGame() {}
 // function resumeGame() {}
@@ -114,10 +115,8 @@ function updateGameUI() {}
 function openInventory() {
     hideAllScreens();
     SCREENS.inventoryScreen.style.display = "block";
+    renderInventory();
 }
-function renderInventory() {}
-function addItemToInventory(item) {}
-function removeItemFromInventory(itemId) {}
 
 // === PC Screen ===
 function openPc() {
