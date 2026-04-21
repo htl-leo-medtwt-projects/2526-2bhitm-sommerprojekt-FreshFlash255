@@ -1,4 +1,4 @@
-let player = {
+let PLAYER = {
     bitcoin: 0,
     money: 200,
     graphicCardsInventory: {},
@@ -7,11 +7,12 @@ let player = {
     energy: 0,
 }
 
-let data = {
+let DATA = {
     graphicCards: {
-
-    },
-    energySupply: {
         
     },
+    energySupply: {
+
+    },
+    bitcoinToMoney: 3600,
 }
