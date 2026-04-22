@@ -1,3 +1,5 @@
+/// <reference path="inventoryScript.js" />
+
 // Simple GPU inventory: player inventory + rack inventory.
 const INVENTORY_UI = {
 	player: document.getElementById('playerInventory'),

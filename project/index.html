@@ -69,6 +69,11 @@
 
     <!-- GAME SCREEN: Hauptspiel, Gebäude, PC und Rack-Interaktion -->
     <section class="gameScreen" id="gameScreen">
+        <div class="dataWrapper" id="dataWrapperGame">
+            <div class="moneyDisplay" id="moneyDisplay"></div>
+            <div class="btcDisplay" id="btcDisplay"></div>
+            <div class="energyDisplay" id="energyDisplay"></div>
+        </div>
         <div class="building" id="building">
             <div class="pcDesk" id="pcDesk"><img onclick="openPc()" src="img/desk.png"></div>
             <div class="rackContainer" id="rackContainer"><img onclick="openInventory()" src="img/Racks.png"></div>
@@ -90,6 +95,11 @@
 
     <!-- PC SCREEN: PC-Interface mit Sidebar (Home, Sell, Shop, Energy) -->
     <section class="pcScreen" id="pcScreen">
+        <div class="dataWrapper" id="dataWrapperPc">
+            <div class="moneyDisplay" id="moneyDisplay"></div>
+            <div class="btcDisplay" id="btcDisplay"></div>
+            <div class="energyDisplay" id="energyDisplay"></div>
+        </div>
         <div class="backButton" id="backButtonPc"><img src="img/exitButton.png" onclick="closePc()"></div>
         <div class="pcWrapper">
             <div class="sidebar" id="sidebar">

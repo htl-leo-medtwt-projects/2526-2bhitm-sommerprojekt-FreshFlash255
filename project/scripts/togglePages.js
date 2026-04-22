@@ -1,4 +1,5 @@
 /// <reference path="mainScript.js" />
+/// <reference path="balanceHandler.js" />
 
 const SCREENS = {
     startScreen: document.getElementById('startScreen'),
@@ -8,7 +9,7 @@ const SCREENS = {
     inventoryScreen: document.getElementById('inventoryScreen'),
     backButtonSettings: document.getElementById('backButtonSettings'),
     backButtonTutorial: document.getElementById('backButtonTutorial'),
-    backButton: document.querySelectorAll('backButton'),
+    backButton: document.querySelectorAll('.backButton'),
     pcScreen: {
         main: document.getElementById('pcScreen'),
         home: document.getElementById('pcHomeScreen'),
@@ -18,6 +19,14 @@ const SCREENS = {
         backButton: document.getElementById('backButtonPc'),
     },
     loadingScreen: document.getElementById('loadingScreen')
+}
+
+const DISPLAY_DATA = {
+    dataAll: document.querySelectorAll('dataWrapper'),
+    data: document.getElementById('dataWrapperPc'),
+    money: document.getElementById('moneyDisplay'),
+    btc: document.getElementById('btcDisplay'),
+    energy: document.getElementById('energyDisplay')
 }
 
 
