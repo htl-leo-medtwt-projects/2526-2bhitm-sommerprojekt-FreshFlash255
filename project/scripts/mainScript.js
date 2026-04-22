@@ -36,11 +36,20 @@ function gameLoop() {
     if (currentUpkeep > 0) {
         PLAYER.money = Math.max(0, PLAYER.money - (currentUpkeep * seconds));
     }
-    updateDisplay();
+    if(oldMoney !== PLAYER.money) {
+        updateDisplay();
+    }
+    let oldMoney = PLAYER.money
 }
 
 function updateDisplay() {
-    SCREENS.dataAll.forEach((id) => {
-        
+    let tempstring = `
+    <div class="moneyDisplay" id="moneyDisplay"><strong>$</strong> ${PLAYER.money}</div>
+    <div class="btcDisplay" id="btcDisplay"><strong>BTC</strong> ${PLAYER.bitcoin}</div>
+    <div class="energyDisplay" id="energyDisplay"><img src=""> ${PLAYER.energy}</div>
+    `;
+    
+    DISPLAY_DATA.dataAll.forEach((element) => {
+        element.innerHTML = tempstring;
     })
 }

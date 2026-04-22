@@ -22,11 +22,7 @@ const SCREENS = {
 }
 
 const DISPLAY_DATA = {
-    dataAll: document.querySelectorAll('dataWrapper'),
-    data: document.getElementById('dataWrapperPc'),
-    money: document.getElementById('moneyDisplay'),
-    btc: document.getElementById('btcDisplay'),
-    energy: document.getElementById('energyDisplay')
+    dataAll: document.querySelectorAll('.dataWrapper')
 }
 
 
@@ -74,9 +70,7 @@ function hideAllScreens() {
 function showLoadingScreen() {
         hideAllScreens()
         SCREENS.loadingScreen.style.display = "block";
-        setTimeout(() => {
-        openStartScreen()
-    }, 2000);
+        setTimeout(200);
 }
 
 
@@ -111,6 +105,7 @@ function openTutorial() {
 
 // === Game Screen ===
 function startGame() {
+    showLoadingScreen()
     hideAllScreens()
     SCREENS.gameScreen.style.display = "block"
     startGameLoop();
@@ -118,7 +113,6 @@ function startGame() {
 // function pauseGame() {}
 // function resumeGame() {}
 function endGame() {}
-function updateGameUI() {}
 
 // === Inventory Screen ===
 function openInventory() {
@@ -159,7 +153,6 @@ function showPCSell() {
     SCREENS.pcScreen.shop.classList.remove('sidebarActive')
     SCREENS.pcScreen.energy.classList.remove('sidebarActive')
 }
-function sellItem(itemId) {}
 
 // === PC – Shop ===
 function showPCShop() {
@@ -168,7 +161,6 @@ function showPCShop() {
     SCREENS.pcScreen.shop.classList.add('sidebarActive')
     SCREENS.pcScreen.energy.classList.remove('sidebarActive')
 }
-function buyItem(itemId) {}
 
 // === PC – Energy ===
 function showPCEnergy() {
@@ -177,16 +169,12 @@ function showPCEnergy() {
     SCREENS.pcScreen.shop.classList.remove('sidebarActive')
     SCREENS.pcScreen.energy.classList.add('sidebarActive')
 }
-function buyEnergy(amount) {}
-function updateEnergyDisplay() {}
-
-
-
 
 // === INIT ===
 function init() {
-    //showLoadingScreen()
+    showLoadingScreen()
     hideAllScreens()
+    updateDisplay()
     openStartScreen()
 }
 

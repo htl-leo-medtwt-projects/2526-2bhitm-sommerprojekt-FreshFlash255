@@ -52,6 +52,13 @@ body {
     width: 100%;
 }
 
+.dataWrapper {
+  position: absolute;
+  right: 5%;
+  top: 5%;
+  filter: drop-shadow(black 5px 4px 10px);
+}
+
 .startScreen {
     display: flex;
     flex-direction: column;
