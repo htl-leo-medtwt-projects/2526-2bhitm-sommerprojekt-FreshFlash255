@@ -269,12 +269,42 @@ body {
 .pcShopScreen {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;  
   height: 100%
+}
+
+.shopItem {
+  display: flex;
+  flex: 0 0 calc(30.333% - 12px); 
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border: 0.0625rem solid #2B2B2B;
+  border-radius: 0.75rem;
+}
+
+.shopItem img {
+  width: 100%;
+}
+
+.shopItemName {
+  font-weight: 700;
+}
+
+.shopItemInfo {
+  font-size: 12px;
+  color: #cfcfcf;
 }
 
 .pcEnergyScreen {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;  
   height: 100%
 }
 

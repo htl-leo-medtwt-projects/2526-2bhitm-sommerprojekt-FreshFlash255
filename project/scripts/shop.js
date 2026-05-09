@@ -1,5 +1,6 @@
 /// <reference path="../data/gameData.js" />
 /// <reference path="inventoryScript.js" />
+/// <reference path="togglePages.js" />
 
 //=== GPUS ===
 
@@ -48,4 +49,47 @@ function buyEnergySupply(id) {
 	spendMoney(source.price);
 	addEnergySupplyItem(id, 1);
 	return true;
+}
+
+function loadShop() {
+	const shopContainer = SCREENS.pcScreen.shop;
+	if (!shopContainer) {
+		return;
+	}
+	let tempString = '';
+	Object.entries(DATA.graphicCards).forEach(([id, gpu]) => {
+		tempString += `
+		<div class="shopItem">
+			<img src="${gpu.img}">
+			<div class="shopItemInfo">
+				<div class="shopItemName">${gpu.name}</div>
+				<div class="shopItemPrice"><strong>Price:</strong> $${gpu.price}</div>
+				<button onclick="buyGpu('${id}')">Buy</button>
+			</div>
+		</div>
+		`;
+	});
+	shopContainer.innerHTML = tempString;
+}
+
+function loadEnergyShop() {
+	const energyShopContainer = SCREENS.pcScreen.energy;
+	if (!energyShopContainer) {
+		return;
+	}
+	let tempString = '';
+	Object.entries(DATA.energySupply).forEach(([id, source]) => {
+		const energyImg = 'img/energy.png';
+		tempString += `
+		<div class="shopItem">
+			<img src="${energyImg}">
+			<div class="shopItemInfo">
+				<div class="shopItemName">${source.name}</div>
+				<div class="shopItemPrice"><strong>Price:</strong> $${source.price}</div>
+				<button onclick="buyEnergySupply('${id}')">Buy</button>
+			</div>
+		</div>
+		`;
+	});
+	energyShopContainer.innerHTML = tempString;
 }

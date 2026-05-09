@@ -21,6 +21,13 @@ const SCREENS = {
     loadingScreen: document.getElementById('loadingScreen')
 }
 
+const PC_SIDEBAR_BTNS = {
+    home: document.getElementById('sidebarBtnHome'),
+    sell: document.getElementById('sidebarBtnSell'),
+    shop: document.getElementById('sidebarBtnShop'),
+    energy: document.getElementById('sidebarBtnEnergy'),
+}
+
 const DISPLAY_DATA = {
     dataAll: document.querySelectorAll('.dataWrapper')
 }
@@ -128,6 +135,7 @@ function openPc() {
     if (SCREENS.pcScreen.backButton) {
         SCREENS.pcScreen.backButton.style.display = 'block';
     }
+    showPcHome();
 }
 function closePc() {
     hideAllScreens();
@@ -140,34 +148,47 @@ function closePc() {
 
 // === PC – Home ===
 function showPcHome() {
-    SCREENS.pcScreen.home.classList.add('sidebarActive')
-    SCREENS.pcScreen.sell.classList.remove('sidebarActive')
-    SCREENS.pcScreen.shop.classList.remove('sidebarActive')
-    SCREENS.pcScreen.energy.classList.remove('sidebarActive')
+    setPcView('home');
 }
 
 // === PC – Sell ===
 function showPcSell() {
-    SCREENS.pcScreen.home.classList.remove('sidebarActive')
-    SCREENS.pcScreen.sell.classList.add('sidebarActive')
-    SCREENS.pcScreen.shop.classList.remove('sidebarActive')
-    SCREENS.pcScreen.energy.classList.remove('sidebarActive')
+    setPcView('sell');
 }
 
 // === PC – Shop ===
 function showPcShop() {
-    SCREENS.pcScreen.home.classList.remove('sidebarActive')
-    SCREENS.pcScreen.sell.classList.remove('sidebarActive')
-    SCREENS.pcScreen.shop.classList.add('sidebarActive')
-    SCREENS.pcScreen.energy.classList.remove('sidebarActive')
+    setPcView('shop');
+    loadShop();
 }
 
 // === PC – Energy ===
 function showPcEnergy() {
-    SCREENS.pcScreen.home.classList.remove('sidebarActive')
-    SCREENS.pcScreen.sell.classList.remove('sidebarActive')
-    SCREENS.pcScreen.shop.classList.remove('sidebarActive')
-    SCREENS.pcScreen.energy.classList.add('sidebarActive')
+    setPcView('energy');
+    loadEnergyShop();
+}
+
+function setPcView(activeKey) {
+    const views = {
+        home: SCREENS.pcScreen.home,
+        sell: SCREENS.pcScreen.sell,
+        shop: SCREENS.pcScreen.shop,
+        energy: SCREENS.pcScreen.energy,
+    };
+
+    Object.entries(views).forEach(([key, view]) => {
+        if (!view) {
+            return;
+        }
+        view.style.display = key === activeKey ? 'flex' : 'none';
+    });
+
+    Object.entries(PC_SIDEBAR_BTNS).forEach(([key, button]) => {
+        if (!button) {
+            return;
+        }
+        button.classList.toggle('sidebarActive', key === activeKey);
+    });
 }
 
 // === INIT ===

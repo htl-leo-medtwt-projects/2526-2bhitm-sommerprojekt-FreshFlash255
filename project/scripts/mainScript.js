@@ -47,7 +47,7 @@ function updateDisplay() {
     let tempstring = `
     <div class="moneyDisplay" id="moneyDisplay"><strong>$</strong> ${PLAYER.money}</div>
     <div class="btcDisplay" id="btcDisplay"><strong>BTC</strong> ${PLAYER.bitcoin}</div>
-    <div class="energyDisplay" id="energyDisplay"><img src=""> ${PLAYER.energy}</div>
+    <div class="energyDisplay" id="energyDisplay"><img src="img/energy.png" height="30"> ${PLAYER.energy}</div>
     `;
     
     DISPLAY_DATA.dataAll.forEach((element) => {
