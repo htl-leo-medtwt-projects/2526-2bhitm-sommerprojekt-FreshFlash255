@@ -1,6 +1,5 @@
-/// <reference path="inventoryScript.js" />
+/// <reference path="../data/gameData.js" />
 
-// Simple GPU inventory: player inventory + rack inventory.
 const INVENTORY_UI = {
 	player: document.getElementById('playerInventory'),
 	rack: document.getElementById('rackInventory'),
@@ -84,15 +83,14 @@ function calculateTotals(bucket) {
 	return { totalCount, totalPower, totalEnergyUse };
 }
 
-function buildItemHtml(id, gpu, count, actionsHtml) {
+function buildItem(id, gpu, count) {
 	return `
 		<div class="inventoryItem">
 			<div class="inventoryItemInfo">
 				<div class="inventoryItemName">${gpu.name}</div>
-				<div class="inventoryItemDesc">${gpu.description}</div>
+				<img class="gpuImg" src="${gpu.img}">
 			</div>
 			<div class="inventoryItemCount">x${count}</div>
-			<div class="inventoryActions">${actionsHtml}</div>
 		</div>
 	`;
 }
@@ -105,18 +103,13 @@ function renderPlayerInventory() {
 	const itemsHtml = Object.entries(DATA.graphicCards)
 		.map(([id, gpu]) => {
 			const count = getItemCount(inventory, id);
-			const actions = `
-				<button onclick="addItemToInventory('${id}')">+</button>
-				<button onclick="removeItemFromInventory('${id}')">-</button>
-				<button onclick="installGpu('${id}')">Einbauen</button>
-			`;
-			return buildItemHtml(id, gpu, count, actions);
+			return buildItem(id, gpu, count);
 		})
 		.join('');
 	const totals = calculateTotals(inventory);
 
 	INVENTORY_UI.player.innerHTML = `
-		<div class="inventoryTitle">Dein Inventar</div>
+		<div class="inventoryTitle">Inventar</div>
 		<div class="inventoryList">${itemsHtml}</div>
 		<div class="inventorySummary">GPUs: ${totals.totalCount}</div>
 	`;
@@ -146,7 +139,7 @@ function renderRackInventory() {
 			const actions = `
 				<button onclick="uninstallGpu('${id}')">Ausbauen</button>
 			`;
-			return buildItemHtml(id, gpu, Number(count) || 0, actions);
+			return buildItem(id, gpu, Number(count) || 0, actions);
 		})
 		.join('');
 	const totals = calculateTotals(rack);

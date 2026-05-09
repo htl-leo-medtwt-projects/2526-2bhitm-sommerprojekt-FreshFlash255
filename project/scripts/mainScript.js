@@ -11,6 +11,7 @@ const MONEY_PER_POWER_PER_SECOND = 1;
 let gameLoopId = null;
 let currentPower = 0;
 let currentUpkeep = 0;
+let oldMoney = 0;
 
 function startGameLoop() {
     if (gameLoopId !== null) {
@@ -39,7 +40,7 @@ function gameLoop() {
     if(oldMoney !== PLAYER.money) {
         updateDisplay();
     }
-    let oldMoney = PLAYER.money
+    oldMoney = PLAYER.money
 }
 
 function updateDisplay() {

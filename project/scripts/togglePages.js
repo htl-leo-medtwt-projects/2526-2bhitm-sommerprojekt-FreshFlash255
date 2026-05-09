@@ -131,7 +131,7 @@ function openPc() {
 }
 function closePc() {
     hideAllScreens();
-    showPCHome();
+    showPcHome();
     SCREENS.gameScreen.style.display = "block";
     if (SCREENS.pcScreen.backButton) {
         SCREENS.pcScreen.backButton.style.display = 'none';
@@ -139,7 +139,7 @@ function closePc() {
 }
 
 // === PC – Home ===
-function showPCHome() {
+function showPcHome() {
     SCREENS.pcScreen.home.classList.add('sidebarActive')
     SCREENS.pcScreen.sell.classList.remove('sidebarActive')
     SCREENS.pcScreen.shop.classList.remove('sidebarActive')
@@ -147,7 +147,7 @@ function showPCHome() {
 }
 
 // === PC – Sell ===
-function showPCSell() {
+function showPcSell() {
     SCREENS.pcScreen.home.classList.remove('sidebarActive')
     SCREENS.pcScreen.sell.classList.add('sidebarActive')
     SCREENS.pcScreen.shop.classList.remove('sidebarActive')
@@ -155,7 +155,7 @@ function showPCSell() {
 }
 
 // === PC – Shop ===
-function showPCShop() {
+function showPcShop() {
     SCREENS.pcScreen.home.classList.remove('sidebarActive')
     SCREENS.pcScreen.sell.classList.remove('sidebarActive')
     SCREENS.pcScreen.shop.classList.add('sidebarActive')
@@ -163,7 +163,7 @@ function showPCShop() {
 }
 
 // === PC – Energy ===
-function showPCEnergy() {
+function showPcEnergy() {
     SCREENS.pcScreen.home.classList.remove('sidebarActive')
     SCREENS.pcScreen.sell.classList.remove('sidebarActive')
     SCREENS.pcScreen.shop.classList.remove('sidebarActive')
