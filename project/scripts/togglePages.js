@@ -9,6 +9,7 @@ const SCREENS = {
     inventoryScreen: document.getElementById('inventoryScreen'),
     backButtonSettings: document.getElementById('backButtonSettings'),
     backButtonTutorial: document.getElementById('backButtonTutorial'),
+    backButtonInventory: document.getElementById('backButtonInventory'),
     backButton: document.querySelectorAll('.backButton'),
     pcScreen: {
         main: document.getElementById('pcScreen'),
@@ -124,7 +125,10 @@ function endGame() {}
 // === Inventory Screen ===
 function openInventory() {
     hideAllScreens();
-    SCREENS.inventoryScreen.style.display = "block";
+    SCREENS.inventoryScreen.style.display = "grid";
+    if (SCREENS.backButtonInventory) {
+        SCREENS.backButtonInventory.style.display = 'block';
+    }
     renderInventory();
 }
 
@@ -148,22 +152,38 @@ function closePc() {
 
 // === PC – Home ===
 function showPcHome() {
+    /* SCREENS.pcScreen.home.classList.add('sidebarActive')
+    SCREENS.pcScreen.sell.classList.remove('sidebarActive')
+    SCREENS.pcScreen.shop.classList.remove('sidebarActive')
+    SCREENS.pcScreen.energy.classList.remove('sidebarActive') */
     setPcView('home');
 }
 
 // === PC – Sell ===
 function showPcSell() {
+    /* SCREENS.pcScreen.home.classList.remove('sidebarActive')
+    SCREENS.pcScreen.sell.classList.add('sidebarActive')
+    SCREENS.pcScreen.shop.classList.remove('sidebarActive')
+    SCREENS.pcScreen.energy.classList.remove('sidebarActive') */
     setPcView('sell');
 }
 
 // === PC – Shop ===
 function showPcShop() {
+    /* SCREENS.pcScreen.home.classList.remove('sidebarActive')
+    SCREENS.pcScreen.sell.classList.remove('sidebarActive')
+    SCREENS.pcScreen.shop.classList.add('sidebarActive')
+    SCREENS.pcScreen.energy.classList.remove('sidebarActive') */
     setPcView('shop');
     loadShop();
 }
 
 // === PC – Energy ===
 function showPcEnergy() {
+    /* SCREENS.pcScreen.home.classList.remove('sidebarActive')
+    SCREENS.pcScreen.sell.classList.remove('sidebarActive')
+    SCREENS.pcScreen.shop.classList.remove('sidebarActive')
+    SCREENS.pcScreen.energy.classList.add('sidebarActive') */
     setPcView('energy');
     loadEnergyShop();
 }

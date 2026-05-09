@@ -83,14 +83,18 @@ function calculateTotals(bucket) {
 	return { totalCount, totalPower, totalEnergyUse };
 }
 
-function buildItem(id, gpu, count) {
+function buildItem(id, gpu, count, options = {}) {
+	const actionsHtml = options.actionsHtml || '';
+	const clickHandler = options.clickHandler ? ` onclick="${options.clickHandler}"` : '';
+
 	return `
-		<div class="inventoryItem">
+		<div class="inventoryItem"${clickHandler}>
 			<div class="inventoryItemInfo">
 				<div class="inventoryItemName">${gpu.name}</div>
 				<img class="gpuImg" src="${gpu.img}">
 			</div>
 			<div class="inventoryItemCount">x${count}</div>
+			${actionsHtml}
 		</div>
 	`;
 }
@@ -103,7 +107,7 @@ function renderPlayerInventory() {
 	const itemsHtml = Object.entries(DATA.graphicCards)
 		.map(([id, gpu]) => {
 			const count = getItemCount(inventory, id);
-			return buildItem(id, gpu, count);
+			return buildItem(id, gpu, count, { clickHandler: `installGpu('${id}')` });
 		})
 		.join('');
 	const totals = calculateTotals(inventory);
@@ -111,7 +115,6 @@ function renderPlayerInventory() {
 	INVENTORY_UI.player.innerHTML = `
 		<div class="inventoryTitle">Inventar</div>
 		<div class="inventoryList">${itemsHtml}</div>
-		<div class="inventorySummary">GPUs: ${totals.totalCount}</div>
 	`;
 }
 
@@ -139,7 +142,7 @@ function renderRackInventory() {
 			const actions = `
 				<button onclick="uninstallGpu('${id}')">Ausbauen</button>
 			`;
-			return buildItem(id, gpu, Number(count) || 0, actions);
+			return buildItem(id, gpu, Number(count) || 0, { actionsHtml: actions });
 		})
 		.join('');
 	const totals = calculateTotals(rack);

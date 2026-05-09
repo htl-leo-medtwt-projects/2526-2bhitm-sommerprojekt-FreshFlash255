@@ -54,6 +54,7 @@ function buyEnergySupply(id) {
 function loadShop() {
 	const shopContainer = SCREENS.pcScreen.shop;
 	if (!shopContainer) {
+		console.error("Shop container not found");
 		return;
 	}
 	let tempString = '';
@@ -75,6 +76,7 @@ function loadShop() {
 function loadEnergyShop() {
 	const energyShopContainer = SCREENS.pcScreen.energy;
 	if (!energyShopContainer) {
+		console.error("Energy shop container not found");
 		return;
 	}
 	let tempString = '';
