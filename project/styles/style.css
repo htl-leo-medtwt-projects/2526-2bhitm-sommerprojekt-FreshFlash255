@@ -59,6 +59,10 @@ body {
   filter: drop-shadow(black 5px 4px 10px);
 }
 
+.energyDisplay.isNegative {
+  color: #ff4d4d;
+}
+
 .startScreen {
     display: flex;
     flex-direction: column;
@@ -345,8 +349,8 @@ body {
   padding: 1rem;
   box-sizing: border-box;
   color: #f2f2f2;
-  font-family: Arial, sans-serif;
   overflow-y: auto;
+  scrollbar-width: none;
   backdrop-filter: blur(5px);
 }
 
@@ -358,7 +362,7 @@ body {
 
 .inventoryList {
   display: grid;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.75rem;
   overflow: hidden;
 }
@@ -381,7 +385,7 @@ body {
 }
 
 .inventoryItemName {
-  font-weight: 700;
+  font-size: 12px;
   margin-bottom: 0.25rem;
 }
 

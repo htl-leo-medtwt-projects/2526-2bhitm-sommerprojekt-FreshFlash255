@@ -139,10 +139,7 @@ function renderRackInventory() {
 			if (!gpu) {
 				return '';
 			}
-			const actions = `
-				<button onclick="uninstallGpu('${id}')">Ausbauen</button>
-			`;
-			return buildItem(id, gpu, Number(count) || 0, { actionsHtml: actions });
+			return buildItem(id, gpu, Number(count) || 0, { clickHandler: `uninstallGpu('${id}')` });
 		})
 		.join('');
 	const totals = calculateTotals(rack);
