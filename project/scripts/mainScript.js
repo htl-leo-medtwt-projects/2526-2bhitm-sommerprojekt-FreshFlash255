@@ -35,15 +35,28 @@ function stopGameLoop() {
 function gameLoop() {
     updateGeneratingPower();
     const seconds = GAME_LOOP_INTERVAL / 1000;
+
+    if (DATA.stats) {
+        DATA.stats.playTimeSeconds += seconds;
+    }
     
     updateBtcToMoney(seconds);
 
     if (currentPower > 0) {
-        PLAYER.bitcoin += currentPower * BITCOIN_PER_POWER_PER_SECOND * seconds;
+        const mined = currentPower * BITCOIN_PER_POWER_PER_SECOND * seconds;
+        PLAYER.bitcoin += mined;
+        if (DATA.stats) {
+            DATA.stats.totalBtcMined += mined;
+        }
         PLAYER.bitcoin = roundToDecimals(PLAYER.bitcoin, BITCOIN_DECIMALS);
     }
     if (currentUpkeep > 0) {
-        PLAYER.money = Math.max(0, PLAYER.money - (currentUpkeep * seconds));
+        const upkeepCost = currentUpkeep * seconds;
+        const moneyBefore = PLAYER.money;
+        PLAYER.money = Math.max(0, PLAYER.money - upkeepCost);
+        if (DATA.stats) {
+            DATA.stats.totalMoneySpent += Math.max(0, moneyBefore - PLAYER.money);
+        }
         PLAYER.money = roundToDecimals(PLAYER.money, MONEY_DECIMALS);
     }
     const moneyChanged = oldMoney !== PLAYER.money;
@@ -51,6 +64,9 @@ function gameLoop() {
     const energyChanged = oldEnergy !== PLAYER.energy;
     if (moneyChanged || bitcoinChanged || energyChanged) {
         updateDisplay();
+    }
+    if (typeof updateHomeStatsDisplay === 'function') {
+        updateHomeStatsDisplay();
     }
     oldMoney = PLAYER.money;
     oldBitcoin = PLAYER.bitcoin;

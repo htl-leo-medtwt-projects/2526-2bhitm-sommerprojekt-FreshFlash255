@@ -89,4 +89,14 @@ let DATA = {
         }
     },
     bitcoinToMoney: 3600,
+    stats: {
+        playTimeSeconds: 0,
+        totalBtcMined: 0,
+        totalMoneyEarned: 0,
+        totalMoneySpent: 0,
+        btcRateMin: 3600,
+        btcRateMax: 3600,
+        btcRateSum: 0,
+        btcRateSamples: 0,
+    },
 }

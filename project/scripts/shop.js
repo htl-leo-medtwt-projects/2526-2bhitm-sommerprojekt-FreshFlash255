@@ -9,7 +9,18 @@ function canAfford(price) {
 }
 
 function spendMoney(price) {
-	PLAYER.money = Math.max(0, Number(PLAYER.money) - Number(price));
+	const moneyBefore = Number(PLAYER.money);
+	PLAYER.money = Math.max(0, moneyBefore - Number(price));
+	if (DATA.stats) {
+		DATA.stats.totalMoneySpent = (Number(DATA.stats.totalMoneySpent) || 0) + Math.max(0, moneyBefore - PLAYER.money);
+	}
+	const moneyDecimals = typeof MONEY_DECIMALS === 'number' ? MONEY_DECIMALS : 2;
+	if (typeof roundToDecimals === 'function') {
+		PLAYER.money = roundToDecimals(PLAYER.money, moneyDecimals);
+	} else {
+		const factor = 10 ** moneyDecimals;
+		PLAYER.money = Math.round(PLAYER.money * factor) / factor;
+	}
 }
 
 function buyGpu(id) {

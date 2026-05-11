@@ -26,12 +26,25 @@ function seedBtcRateHistory(baseValue) {
 	BTC_RATE_HISTORY.length = 0;
 	const points = Math.min(BTC_RATE_SEED_POINTS, BTC_RATE_MAX_POINTS);
 	let value = clampValue(baseValue, BTC_RATE_MIN, BTC_RATE_MAX);
+	let minValue = value;
+	let maxValue = value;
+	let sumValue = 0;
 	for (let i = 0; i < points; i += 1) {
 		if (i !== 0) {
 			const drift = (Math.random() - 0.5) * 0.08;
 			value = clampValue(value * (1 + drift), BTC_RATE_MIN, BTC_RATE_MAX);
 		}
-		BTC_RATE_HISTORY.push({ time: i, value: Math.round(value) });
+		const rounded = Math.round(value);
+		BTC_RATE_HISTORY.push({ time: i, value: rounded });
+		minValue = Math.min(minValue, rounded);
+		maxValue = Math.max(maxValue, rounded);
+		sumValue += rounded;
+	}
+	if (DATA.stats) {
+		DATA.stats.btcRateMin = minValue;
+		DATA.stats.btcRateMax = maxValue;
+		DATA.stats.btcRateSum = sumValue;
+		DATA.stats.btcRateSamples = points;
 	}
 }
 
@@ -80,6 +93,15 @@ function updateBtcToMoney(seconds = 1) {
 	);
 
 	DATA.bitcoinToMoney = Math.round(BTC_RATE_STATE.value);
+	if (DATA.stats) {
+		const rate = DATA.bitcoinToMoney;
+		const currentMin = Number.isFinite(DATA.stats.btcRateMin) ? DATA.stats.btcRateMin : rate;
+		const currentMax = Number.isFinite(DATA.stats.btcRateMax) ? DATA.stats.btcRateMax : rate;
+		DATA.stats.btcRateMin = Math.min(currentMin, rate);
+		DATA.stats.btcRateMax = Math.max(currentMax, rate);
+		DATA.stats.btcRateSum = (Number(DATA.stats.btcRateSum) || 0) + rate;
+		DATA.stats.btcRateSamples = (Number(DATA.stats.btcRateSamples) || 0) + 1;
+	}
 	pushBtcRatePoint(DATA.bitcoinToMoney);
 	updateSellRateDisplay();
 	return DATA.bitcoinToMoney;
@@ -115,6 +137,20 @@ function formatPlayTime(time) {
 	return `${minutes}:${String(seconds).padStart(2, '0')}`;
 }
 
+function formatMoney(value) {
+	const decimals = typeof MONEY_DECIMALS === 'number' ? MONEY_DECIMALS : 2;
+	return Number(value || 0).toFixed(decimals);
+}
+
+function formatBtcTotal(value) {
+	const decimals = typeof BITCOIN_DECIMALS === 'number' ? BITCOIN_DECIMALS : 4;
+	return Number(value || 0).toFixed(decimals);
+}
+
+function formatRate(value) {
+	return Math.round(Number(value) || 0);
+}
+
 function sellBitcoin(amount) {
 	const amountNumber = Number(amount);
 	if (!Number.isFinite(amountNumber) || amountNumber <= 0) {
@@ -128,6 +164,16 @@ function sellBitcoin(amount) {
 	const payout = sellAmount * rate;
 	PLAYER.bitcoin = Math.max(0, Number(PLAYER.bitcoin) - sellAmount);
 	PLAYER.money = Number(PLAYER.money) + payout;
+	if (DATA.stats) {
+		DATA.stats.totalMoneyEarned = (Number(DATA.stats.totalMoneyEarned) || 0) + payout;
+	}
+	const moneyDecimals = typeof MONEY_DECIMALS === 'number' ? MONEY_DECIMALS : 2;
+	if (typeof roundToDecimals === 'function') {
+		PLAYER.money = roundToDecimals(PLAYER.money, moneyDecimals);
+	} else {
+		const factor = 10 ** moneyDecimals;
+		PLAYER.money = Math.round(PLAYER.money * factor) / factor;
+	}
 	if (typeof updateDisplay === 'function') {
 		updateDisplay();
 	}
@@ -168,13 +214,41 @@ function renderSellScreen() {
 		<div class="sellChart" id="btcChart"></div>
 	`;
 
-	ensureBtcChart();
+	ensureBtcChart('btcChart');
 	updateSellRateDisplay();
 }
 
+function renderHomeScreen() {
+	const homeScreen = SCREENS.pcScreen.home;
+	if (!homeScreen) {
+		return;
+	}
+
+	homeScreen.innerHTML = `
+		<div class="homePanel">
+			<div class="homeChart" id="btcChartHome"></div>
+			<aside class="homeStats">
+				<div class="homeStatsTitle">Overall Stats</div>
+				<div class="homeStatsList">
+					<div class="homeStatRow"><span>Playtime</span><span id="statPlaytime">0:00</span></div>
+					<div class="homeStatRow"><span>BTC mined</span><span id="statBtcMined">0</span></div>
+					<div class="homeStatRow"><span>Money earned</span><span id="statMoneyEarned">0</span></div>
+					<div class="homeStatRow"><span>Money spent</span><span id="statMoneySpent">0</span></div>
+					<div class="homeStatRow"><span>Rate min</span><span id="statBtcRateMin">0</span></div>
+					<div class="homeStatRow"><span>Rate max</span><span id="statBtcRateMax">0</span></div>
+					<div class="homeStatRow"><span>Rate avg</span><span id="statBtcRateAvg">0</span></div>
+				</div>
+			</aside>
+		</div>
+	`;
+
+	ensureBtcChart('btcChartHome');
+	updateHomeStatsDisplay();
+}
+
 //Template von KI selbst bearbeitet und abgeändert
-function ensureBtcChart() {
-	const container = document.getElementById('btcChart');
+function ensureBtcChart(containerId = 'btcChart') {
+	const container = document.getElementById(containerId);
 	if (!container || typeof LightweightCharts === 'undefined') {
 		return;
 	}
@@ -256,6 +330,40 @@ function ensureBtcChart() {
 			BTC_CHART_STATE.container.clientHeight
 		);
 	});
+}
+
+function updateHomeStatsDisplay() {
+	const stats = DATA.stats || {};
+	const playtimeEl = document.getElementById('statPlaytime');
+	if (playtimeEl) {
+		playtimeEl.textContent = formatPlayTime(stats.playTimeSeconds);
+	}
+	const btcMinedEl = document.getElementById('statBtcMined');
+	if (btcMinedEl) {
+		btcMinedEl.textContent = formatBtcTotal(stats.totalBtcMined);
+	}
+	const moneyEarnedEl = document.getElementById('statMoneyEarned');
+	if (moneyEarnedEl) {
+		moneyEarnedEl.textContent = formatMoney(stats.totalMoneyEarned);
+	}
+	const moneySpentEl = document.getElementById('statMoneySpent');
+	if (moneySpentEl) {
+		moneySpentEl.textContent = formatMoney(stats.totalMoneySpent);
+	}
+	const minRateEl = document.getElementById('statBtcRateMin');
+	if (minRateEl) {
+		minRateEl.textContent = formatRate(stats.btcRateMin);
+	}
+	const maxRateEl = document.getElementById('statBtcRateMax');
+	if (maxRateEl) {
+		maxRateEl.textContent = formatRate(stats.btcRateMax);
+	}
+	const avgRateEl = document.getElementById('statBtcRateAvg');
+	if (avgRateEl) {
+		const samples = Number(stats.btcRateSamples) || 0;
+		const avg = samples > 0 ? stats.btcRateSum / samples : stats.btcRateMin;
+		avgRateEl.textContent = formatRate(avg);
+	}
 }
 
 function updateSellRateDisplay() {
