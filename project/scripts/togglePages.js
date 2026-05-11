@@ -166,6 +166,9 @@ function showPcSell() {
     SCREENS.pcScreen.shop.classList.remove('sidebarActive')
     SCREENS.pcScreen.energy.classList.remove('sidebarActive') */
     setPcView('sell');
+    if (typeof renderSellScreen === 'function') {
+        renderSellScreen();
+    }
 }
 
 // === PC – Shop ===

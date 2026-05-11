@@ -7,7 +7,9 @@ let SETTINGS = {
 }
 
 const GAME_LOOP_INTERVAL = 1000;
-const BITCOIN_PER_POWER_PER_SECOND = 1;
+const BITCOIN_PER_POWER_PER_SECOND = 0.001;
+const BITCOIN_DECIMALS = 4;
+const MONEY_DECIMALS = 2;
 let gameLoopId = null;
 let currentPower = 0;
 let currentUpkeep = 0;
@@ -33,11 +35,16 @@ function stopGameLoop() {
 function gameLoop() {
     updateGeneratingPower();
     const seconds = GAME_LOOP_INTERVAL / 1000;
+    
+    updateBtcToMoney(seconds);
+
     if (currentPower > 0) {
         PLAYER.bitcoin += currentPower * BITCOIN_PER_POWER_PER_SECOND * seconds;
+        PLAYER.bitcoin = roundToDecimals(PLAYER.bitcoin, BITCOIN_DECIMALS);
     }
     if (currentUpkeep > 0) {
         PLAYER.money = Math.max(0, PLAYER.money - (currentUpkeep * seconds));
+        PLAYER.money = roundToDecimals(PLAYER.money, MONEY_DECIMALS);
     }
     const moneyChanged = oldMoney !== PLAYER.money;
     const bitcoinChanged = oldBitcoin !== PLAYER.bitcoin;
@@ -48,6 +55,11 @@ function gameLoop() {
     oldMoney = PLAYER.money;
     oldBitcoin = PLAYER.bitcoin;
     oldEnergy = PLAYER.energy;
+}
+
+function roundToDecimals(value, decimals) {
+    let factor = 10 ** decimals;
+    return Math.round((Number(value)) * factor) / factor;
 }
 
 function updateDisplay() {
