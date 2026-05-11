@@ -275,8 +275,8 @@ body {
 }
 
 .sellPanel {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 0.4rem;
   padding: 0.6rem;
   border: 0.0625rem solid #2B2B2B;
@@ -295,27 +295,34 @@ body {
   align-items: center;
 }
 
-.sellControls input {
-  width: 8rem;
-  padding: 0.25rem 0.4rem;
-  border-radius: 0.4rem;
-  border: 0.0625rem solid #222;
-  background: #101010;
-  color: #fff;
-  font-family: inherit;
-}
-
 .sellControls button {
+  font-family: 'Pixeled';
   cursor: pointer;
-  border: 0.0625rem solid #000;
-  background: #444;
-  color: #fff;
-  border-radius: 0.4rem;
-  padding: 0.25rem 0.6rem;
+  background: linear-gradient(to bottom, #4a4a4a, #2f2f2f);
+  color: #f2f2f2;
+  border: 2px solid #1a1a1a;
+  border-radius: 0.45rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  box-shadow:
+    inset 0 1px 0 #666,
+    0 3px 0 #111,
+    0 4px 6px rgba(0,0,0,0.35);
+  transition:
+    transform 0.06s ease,
+    box-shadow 0.06s ease;
 }
 
 .sellControls button:hover {
-  background: #555;
+  background: linear-gradient(to bottom, #555, #383838);
+}
+
+.sellControls button:active {
+  transform: translateY(2px);
+  box-shadow:
+    inset 0 1px 0 #666,
+    0 1px 0 #111,
+    0 2px 3px rgba(0,0,0,0.3);
 }
 
 .sellChart {
@@ -562,4 +569,58 @@ body {
   stroke: #444;
   stroke-width: 0.03125rem;
   filter: drop-shadow(0 0 0.125rem rgba(0, 0, 0, 0.6));
+}
+
+
+
+
+input[type="number"] {
+  font-family: 'Pixeled';
+  appearance: textfield;
+  -moz-appearance: textfield;
+
+  width: 15%;
+  padding: 12px;
+
+  background: #2b2b2b;
+  color: #e8e8e8;
+
+  border: 4px solid #1a1a1a;
+  outline: 4px solid #000;
+
+  font-size: 14px;
+
+  image-rendering: pixelated;
+
+  box-shadow:
+    inset -4px -4px 0 #151515,
+    inset 4px 4px 0 #444,
+    4px 4px 0 #000;
+
+  transition: 0.08s;
+}
+
+input[type="number"]:hover {
+  background: #353535;
+}
+
+input[type="number"]:focus {
+  background: #3d3d3d;
+  border-color: #777;
+}
+
+input[type="number"]:active {
+  transform: translate(2px, 2px);
+
+  box-shadow:
+    inset -2px -2px 0 #151515,
+    inset 2px 2px 0 #444,
+    2px 2px 0 #000;
+}
+
+/* Pfeile entfernen */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

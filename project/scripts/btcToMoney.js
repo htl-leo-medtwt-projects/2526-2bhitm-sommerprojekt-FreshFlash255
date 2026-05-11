@@ -121,9 +121,9 @@ function renderSellScreen() {
 			<div class="sellRate">Kurs: $<span id="btcRateValue">${DATA.bitcoinToMoney}</span></div>
 			<div class="sellHoldings">Dein BTC: <span id="btcHoldingsValue">${formatBtc(PLAYER.bitcoin)}</span></div>
 			<div class="sellControls">
-				<input type="number" id="btcSellAmount" min="0" step="0.0001" placeholder="BTC" />
-				<button onclick="sellBitcoinFromInput()">Sell</button>
-				<button onclick="sellAllBitcoin()">Sell all</button>
+				<input type="number" min="0.0001" max="${formatBtc(PLAYER.bitcoin)}" id="btcSellAmount" step="1" placeholder="BTC" />
+				<button class="sellBtn" onclick="sellBitcoinFromInput()">Sell</button>
+				<button class="sellBtn" onclick="sellAllBitcoin()">Sell all</button>
 			</div>
 		</div>
 		<div class="sellChart" id="btcChart"></div>
@@ -164,11 +164,14 @@ function ensureBtcChart() {
 		timeScale: { borderColor: '#333', timeVisible: true, secondsVisible: true },
 	});
 
-	BTC_CHART_STATE.series = BTC_CHART_STATE.chart.addAreaSeries({
-		lineColor: '#00ccff',
-		topColor: 'rgba(0, 204, 255, 0.3)',
-		bottomColor: 'rgba(0, 204, 255, 0.0)',
-	});
+	BTC_CHART_STATE.series = BTC_CHART_STATE.chart.addSeries(
+		LightweightCharts.AreaSeries,
+		{
+			lineColor: '#00ccff',
+			topColor: 'rgba(0, 204, 255, 0.3)',
+			bottomColor: 'rgba(0, 204, 255, 0.0)',
+		}
+	);
 
 	if (BTC_RATE_HISTORY.length) {
 		BTC_CHART_STATE.series.setData(BTC_RATE_HISTORY);
