@@ -57,35 +57,40 @@ let DATA = {
             price: 80,
             output: 1,
             upkeep: 0,
-            description: "Manual power, cheap but tiny output."
+            description: "Manual power, cheap but tiny output.",
+            img: "img/energy/bike.png"
         },
         solarPanel: {
             name: "Solar Panel",
             price: 400,
             output: 4,
             upkeep: 0,
-            description: "Reliable daytime power."
+            description: "Reliable daytime power.",
+            img: "img/energy/solar.png"
         },
         windTurbine: {
             name: "Wind Turbine",
             price: 900,
             output: 9,
             upkeep: 1,
-            description: "Solid output, small maintenance cost."
+            description: "Solid output, small maintenance cost.",
+            img: "img/energy/wind.png"
         },
         hydroTurbine: {
             name: "Hydro Turbine",
             price: 1600,
             output: 16,
             upkeep: 2,
-            description: "Stable power with moderate upkeep."
+            description: "Stable power with moderate upkeep.",
+            img: "img/energy/hydro.png"
         },
         fusionCore: {
             name: "Fusion Core",
             price: 3000,
             output: 30,
             upkeep: 4,
-            description: "Massive output for large operations."
+            description: "Massive output for large operations.",
+            img: "img/energy/fusion.png"
         }
     },
     bitcoinToMoney: 3600,

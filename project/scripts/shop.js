@@ -76,7 +76,7 @@ function loadShop() {
 			<div class="shopItemInfo">
 				<div class="shopItemName">${gpu.name}</div>
 				<div class="shopItemPrice"><strong>Price:</strong> $${gpu.price}</div>
-				<button onclick="buyGpu('${id}')">Buy</button>
+				<div class="shopBtn" onclick="buyGpu('${id}')">Buy</div>
 			</div>
 		</div>
 		`;
@@ -92,14 +92,14 @@ function loadEnergyShop() {
 	}
 	let tempString = '';
 	Object.entries(DATA.energySupply).forEach(([id, source]) => {
-		const energyImg = 'img/energy.png';
+		const energyImg = source.img || "img/energy.png";
 		tempString += `
 		<div class="shopItem">
-			<img src="${energyImg}">
+			<img src="${energyImg}" onerror="this.src='img/energy.png'">
 			<div class="shopItemInfo">
 				<div class="shopItemName">${source.name}</div>
 				<div class="shopItemPrice"><strong>Price:</strong> $${source.price}</div>
-				<button onclick="buyEnergySupply('${id}')">Buy</button>
+				<div class="shopBtn" onclick="buyEnergySupply('${id}')">Buy</div>
 			</div>
 		</div>
 		`;
