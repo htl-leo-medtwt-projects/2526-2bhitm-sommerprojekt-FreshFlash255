@@ -4,7 +4,7 @@ const BTC_RATE_STATE = {
 	velocity: 0,
 };
 
-const BTC_RATE_HISTORY = [];
+let BTC_RATE_HISTORY = [];
 const BTC_RATE_MAX_POINTS = 120;
 const BTC_RATE_MIN = 800;
 const BTC_RATE_MAX = 12000;
@@ -69,6 +69,7 @@ function initBtcToMoney() {
 	BTC_CHART_STATE.startTime = now - offset;
 }
 
+//KI
 function updateBtcToMoney(seconds = 1) {
 	if (!Number.isFinite(BTC_RATE_STATE.value)) {
 		initBtcToMoney();
