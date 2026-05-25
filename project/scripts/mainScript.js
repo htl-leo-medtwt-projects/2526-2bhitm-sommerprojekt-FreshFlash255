@@ -76,6 +76,9 @@ function gameLoop() {
     if (typeof syncRuntimeStats === 'function') {
         syncRuntimeStats();
     }
+    if (typeof saveStatsToLocalStorage === 'function') {
+        saveStatsToLocalStorage();
+    }
     if (typeof updateHomeStatsDisplay === 'function') {
         updateHomeStatsDisplay();
     }
