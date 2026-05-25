@@ -79,6 +79,9 @@ function gameLoop() {
     if (typeof saveStatsToLocalStorage === 'function') {
         saveStatsToLocalStorage();
     }
+    if (typeof savePlayerToLocalStorage === 'function') {
+        savePlayerToLocalStorage();
+    }
     if (typeof updateHomeStatsDisplay === 'function') {
         updateHomeStatsDisplay();
     }
