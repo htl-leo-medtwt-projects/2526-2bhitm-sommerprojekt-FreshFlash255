@@ -54,6 +54,7 @@ body {
 
 .dataWrapper {
   position: absolute;
+  width: 14rem;
   font-size: 1.3rem;
   right: 5%;
   top: 5%;

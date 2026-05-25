@@ -151,11 +151,14 @@ function formatCompactMoney(value) {
 	const amount = Number(value) || 0;
 	const absAmount = Math.abs(amount);
 	const sign = amount < 0 ? '-' : '';
+	const trimTrailingZero = (formatted) => formatted.replace(/\.0$/, '');
 	if (absAmount >= 1_000_000) {
-		return `${sign}${(absAmount / 1_000_000).toFixed(1)}m`;
+		const scaled = trimTrailingZero((absAmount / 1_000_000).toFixed(1));
+		return `${sign}${scaled}m`;
 	}
 	if (absAmount >= 1_000) {
-		return `${sign}${(absAmount / 1_000).toFixed(1)}k`;
+		const scaled = trimTrailingZero((absAmount / 1_000).toFixed(1));
+		return `${sign}${scaled}k`;
 	}
 	return `${sign}${Math.round(absAmount)}`;
 }

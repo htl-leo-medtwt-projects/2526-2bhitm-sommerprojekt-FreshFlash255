@@ -20,7 +20,7 @@ let DATA = {
         },
         budgetGpu: {
             name: "Budget GPU",
-            price: 300,
+            price: 1000,
             power: 3,
             energyUse: 2,
             description: "Decent value for early mining.",
@@ -28,7 +28,7 @@ let DATA = {
         },
         midrangeGpu: {
             name: "Midrange GPU",
-            price: 650,
+            price: 7000,
             power: 7,
             energyUse: 4,
             description: "Balanced output and efficiency.",
@@ -36,7 +36,7 @@ let DATA = {
         },
         proGpu: {
             name: "Pro GPU",
-            price: 1200,
+            price: 20_000,
             power: 14,
             energyUse: 7,
             description: "Strong output for serious rigs.",
@@ -44,7 +44,7 @@ let DATA = {
         },
         titanGpu: {
             name: "Titan GPU",
-            price: 2200,
+            price: 400_000,
             power: 25,
             energyUse: 12,
             description: "Top tier output with high power draw.",
@@ -62,7 +62,7 @@ let DATA = {
         },
         solarPanel: {
             name: "Solar Panel",
-            price: 400,
+            price: 900,
             output: 4,
             upkeep: 0,
             description: "Reliable daytime power.",
@@ -70,7 +70,7 @@ let DATA = {
         },
         windTurbine: {
             name: "Wind Turbine",
-            price: 900,
+            price: 9500,
             output: 9,
             upkeep: 1,
             description: "Solid output, small maintenance cost.",
@@ -78,7 +78,7 @@ let DATA = {
         },
         hydroTurbine: {
             name: "Hydro Turbine",
-            price: 1600,
+            price: 20_000,
             output: 16,
             upkeep: 2,
             description: "Stable power with moderate upkeep.",
@@ -86,10 +86,18 @@ let DATA = {
         },
         fusionCore: {
             name: "Fusion Core",
-            price: 3000,
+            price: 100_000,
             output: 30,
             upkeep: 4,
             description: "Massive output for large operations.",
+            img: "img/energy/fusionCore.png"
+        },
+        gigafusionCore: {
+            name: "Giga Fusion Core",
+            price: 100_000_000,
+            output: 5000,
+            upkeep: 7,
+            description: "Giga massive output for large operations.",
             img: "img/energy/fusionCore.png"
         }
     },
@@ -115,4 +123,26 @@ let DATA = {
         energyUse: 0,
         energyUpkeep: 0,
     },
+    racks: [
+        {
+            price: 0,
+            multiplier: 1.00,
+            capacity: 5,
+        },
+        {
+            price: 10_000,
+            multiplier: 1.00,
+            capacity: 5,
+        },
+        {
+            price: 90_000,
+            multiplier: 1.00,
+            capacity: 5,
+        },
+        {
+            price: 1_000_000,
+            multiplier: 1.00,
+            capacity: 5,
+        }
+    ]
 }
