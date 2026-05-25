@@ -15,3 +15,4 @@
 - Pause Menü
 - Settings Menü
 - Ordendliche Racks Logik(Racks Kosten Geld und haben eine max. Kapazität)
+- Sounddesign

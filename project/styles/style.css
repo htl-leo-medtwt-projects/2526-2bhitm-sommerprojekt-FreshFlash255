@@ -54,6 +54,7 @@ body {
 
 .dataWrapper {
   position: absolute;
+  font-size: 1.3rem;
   right: 5%;
   top: 5%;
   filter: drop-shadow(black 5px 4px 10px);
