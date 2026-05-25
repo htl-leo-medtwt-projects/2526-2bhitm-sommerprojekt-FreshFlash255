@@ -56,16 +56,12 @@ function gameLoop() {
         PLAYER.bitcoin = roundToDecimals(PLAYER.bitcoin, BITCOIN_DECIMALS);
     }
     if (currentUpkeep > 0) {
-        const upkeepCost = currentUpkeep * seconds;
-        const moneyBefore = PLAYER.money;
-        PLAYER.money = Math.max(0, PLAYER.money - upkeepCost);
-        const spent = Math.max(0, moneyBefore - PLAYER.money);
-        if (typeof recordMoneySpent === 'function') {
-            recordMoneySpent(spent);
-        } else if (DATA.stats) {
-            DATA.stats.totalMoneySpent += spent;
-        }
-        PLAYER.money = roundToDecimals(PLAYER.money, MONEY_DECIMALS);
+        const upkeepCostMoney = currentUpkeep * seconds;
+        const rate = Number(DATA.bitcoinToMoney) || 0;
+        const upkeepCostBtc = rate > 0 ? upkeepCostMoney / rate : 0;
+        const btcBefore = Number(PLAYER.bitcoin) || 0;
+        PLAYER.bitcoin = Math.max(0, btcBefore - upkeepCostBtc);
+        PLAYER.bitcoin = roundToDecimals(PLAYER.bitcoin, BITCOIN_DECIMALS);
     }
     const moneyChanged = oldMoney !== PLAYER.money;
     const bitcoinChanged = oldBitcoin !== PLAYER.bitcoin;
@@ -99,7 +95,7 @@ function updateDisplay() {
     const energyValue = Number(PLAYER.energy) || 0;
     const energyClass = energyValue < 0 ? 'energyDisplay isNegative' : 'energyDisplay';
     let tempstring = `
-    <div class="moneyDisplay" id="moneyDisplay"><strong>$</strong> ${PLAYER.money}</div>
+    <div class="moneyDisplay" id="moneyDisplay"><strong>$</strong> ${formatMoneyDisplay(PLAYER.money)}</div>
     <div class="btcDisplay" id="btcDisplay"><strong>BTC</strong> ${PLAYER.bitcoin}</div>
     <div class="${energyClass}" id="energyDisplay"><img src="img/energy.png" height="30"> ${energyValue}</div>
     `;

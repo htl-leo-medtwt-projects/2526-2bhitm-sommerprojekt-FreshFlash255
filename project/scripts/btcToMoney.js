@@ -147,6 +147,27 @@ function formatMoney(value) {
 	return Number(value || 0).toFixed(decimals);
 }
 
+function formatCompactMoney(value) {
+	const amount = Number(value) || 0;
+	const absAmount = Math.abs(amount);
+	const sign = amount < 0 ? '-' : '';
+	if (absAmount >= 1_000_000) {
+		return `${sign}${(absAmount / 1_000_000).toFixed(1)}m`;
+	}
+	if (absAmount >= 1_000) {
+		return `${sign}${(absAmount / 1_000).toFixed(1)}k`;
+	}
+	return `${sign}${Math.round(absAmount)}`;
+}
+
+function formatMoneyDisplay(value) {
+	const amount = Number(value) || 0;
+	if (Math.abs(amount) >= 10_000) {
+		return formatCompactMoney(amount);
+	}
+	return formatMoney(amount);
+}
+
 function formatBtcTotal(value) {
 	const decimals = typeof BITCOIN_DECIMALS === 'number' ? BITCOIN_DECIMALS : 4;
 	return Number(value || 0).toFixed(decimals);
@@ -320,6 +341,10 @@ function ensureBtcChart(containerId = 'btcChart') {
 			lineWidth: 2,
 			topColor: 'rgba(0, 204, 255, 0.3)',
 			bottomColor: 'rgba(0, 204, 255, 0.0)',
+			priceFormat: {
+				type: 'custom',
+				formatter: formatCompactMoney,
+			},
 		}
 	);
 

@@ -4,10 +4,13 @@ function updateGeneratingPower() {
     const energyRatio = gpuTotals.energyUse > 0
         ? Math.min(1, energyTotal.output / gpuTotals.energyUse)
         : 0;
+    const usageRatio = energyTotal.output > 0
+        ? Math.min(1, gpuTotals.energyUse / energyTotal.output)
+        : 0;
     const effectivePower = gpuTotals.power * energyRatio;
 
     currentPower = effectivePower;
-    currentUpkeep = energyTotal.upkeep;
+    currentUpkeep = energyTotal.upkeep * usageRatio;
     PLAYER.generatingPower = effectivePower;
     PLAYER.energy = energyTotal.output - gpuTotals.energyUse;
 }
