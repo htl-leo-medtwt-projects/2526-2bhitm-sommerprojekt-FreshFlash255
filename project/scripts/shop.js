@@ -11,8 +11,11 @@ function canAfford(price) {
 function spendMoney(price) {
 	const moneyBefore = Number(PLAYER.money);
 	PLAYER.money = Math.max(0, moneyBefore - Number(price));
-	if (DATA.stats) {
-		DATA.stats.totalMoneySpent = (Number(DATA.stats.totalMoneySpent) || 0) + Math.max(0, moneyBefore - PLAYER.money);
+	const spent = Math.max(0, moneyBefore - PLAYER.money);
+	if (typeof recordMoneySpent === 'function') {
+		recordMoneySpent(spent);
+	} else if (DATA.stats) {
+		DATA.stats.totalMoneySpent = (Number(DATA.stats.totalMoneySpent) || 0) + spent;
 	}
 	const moneyDecimals = typeof MONEY_DECIMALS === 'number' ? MONEY_DECIMALS : 2;
 	if (typeof roundToDecimals === 'function') {

@@ -40,7 +40,9 @@ function seedBtcRateHistory(baseValue) {
 		maxValue = Math.max(maxValue, rounded);
 		sumValue += rounded;
 	}
-	if (DATA.stats) {
+	if (typeof seedRateStats === 'function') {
+		seedRateStats(minValue, maxValue, sumValue, points);
+	} else if (DATA.stats) {
 		DATA.stats.btcRateMin = minValue;
 		DATA.stats.btcRateMax = maxValue;
 		DATA.stats.btcRateSum = sumValue;
@@ -94,7 +96,9 @@ function updateBtcToMoney(seconds = 1) {
 	);
 
 	DATA.bitcoinToMoney = Math.round(BTC_RATE_STATE.value);
-	if (DATA.stats) {
+	if (typeof recordRateSample === 'function') {
+		recordRateSample(DATA.bitcoinToMoney);
+	} else if (DATA.stats) {
 		const rate = DATA.bitcoinToMoney;
 		const currentMin = Number.isFinite(DATA.stats.btcRateMin) ? DATA.stats.btcRateMin : rate;
 		const currentMax = Number.isFinite(DATA.stats.btcRateMax) ? DATA.stats.btcRateMax : rate;
@@ -165,7 +169,9 @@ function sellBitcoin(amount) {
 	const payout = sellAmount * rate;
 	PLAYER.bitcoin = Math.max(0, Number(PLAYER.bitcoin) - sellAmount);
 	PLAYER.money = Number(PLAYER.money) + payout;
-	if (DATA.stats) {
+	if (typeof recordMoneyEarned === 'function') {
+		recordMoneyEarned(payout);
+	} else if (DATA.stats) {
 		DATA.stats.totalMoneyEarned = (Number(DATA.stats.totalMoneyEarned) || 0) + payout;
 	}
 	const moneyDecimals = typeof MONEY_DECIMALS === 'number' ? MONEY_DECIMALS : 2;

@@ -1,5 +1,6 @@
 /// <reference path="togglePages.js" />
 /// <reference path="../data/gameData.js" />
+/// <reference path="statsHandler.js" />
 /// <reference path="balanceHandler.js" />
 
 let SETTINGS = {
@@ -36,7 +37,9 @@ function gameLoop() {
     updateGeneratingPower();
     const seconds = GAME_LOOP_INTERVAL / 1000;
 
-    if (DATA.stats) {
+    if (typeof recordPlaytime === 'function') {
+        recordPlaytime(seconds);
+    } else if (DATA.stats) {
         DATA.stats.playTimeSeconds += seconds;
     }
     
@@ -45,7 +48,9 @@ function gameLoop() {
     if (currentPower > 0) {
         const mined = currentPower * BITCOIN_PER_POWER_PER_SECOND * seconds;
         PLAYER.bitcoin += mined;
-        if (DATA.stats) {
+        if (typeof recordBtcMined === 'function') {
+            recordBtcMined(mined);
+        } else if (DATA.stats) {
             DATA.stats.totalBtcMined += mined;
         }
         PLAYER.bitcoin = roundToDecimals(PLAYER.bitcoin, BITCOIN_DECIMALS);
@@ -54,8 +59,11 @@ function gameLoop() {
         const upkeepCost = currentUpkeep * seconds;
         const moneyBefore = PLAYER.money;
         PLAYER.money = Math.max(0, PLAYER.money - upkeepCost);
-        if (DATA.stats) {
-            DATA.stats.totalMoneySpent += Math.max(0, moneyBefore - PLAYER.money);
+        const spent = Math.max(0, moneyBefore - PLAYER.money);
+        if (typeof recordMoneySpent === 'function') {
+            recordMoneySpent(spent);
+        } else if (DATA.stats) {
+            DATA.stats.totalMoneySpent += spent;
         }
         PLAYER.money = roundToDecimals(PLAYER.money, MONEY_DECIMALS);
     }
@@ -64,6 +72,9 @@ function gameLoop() {
     const energyChanged = oldEnergy !== PLAYER.energy;
     if (moneyChanged || bitcoinChanged || energyChanged) {
         updateDisplay();
+    }
+    if (typeof syncRuntimeStats === 'function') {
+        syncRuntimeStats();
     }
     if (typeof updateHomeStatsDisplay === 'function') {
         updateHomeStatsDisplay();
