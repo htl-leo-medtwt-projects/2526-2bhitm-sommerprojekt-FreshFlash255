@@ -96,9 +96,9 @@ let DATA = {
             name: "Giga Fusion Core",
             price: 100_000_000,
             output: 5000,
-            upkeep: 7,
+            upkeep: 70,
             description: "Giga massive output for large operations.",
-            img: "img/energy/fusionCore.png"
+            img: "img/energy/fusionCore_epic.png"
         }
     },
     bitcoinToMoney: 3600,

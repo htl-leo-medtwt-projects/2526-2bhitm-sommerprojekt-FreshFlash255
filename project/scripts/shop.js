@@ -24,6 +24,7 @@ function spendMoney(price) {
 		const factor = 10 ** moneyDecimals;
 		PLAYER.money = Math.round(PLAYER.money * factor) / factor;
 	}
+	updateDisplay();
 }
 
 function buyGpu(id) {
@@ -166,7 +167,7 @@ function loadEnergyShop() {
 			<span class="energyItemDetailName">Name: ${source.name}</span>
 			<span class="energyItemDetailPrice">Price: ${formatCompactMoney(source.price)}</span>
 			<span class="energyItemDetailOutput">Energy: ${source.output}</span>
-			<span class="energyItemDetailUpKeep">Cost: ${source.energyUse}</span>
+			<span class="energyItemDetailUpKeep">Cost per sec: ${source.upkeep}</span>
 			<span class="energyItemDetailDesc">Description: ${source.description}</span>
 		</div>
 		`;
