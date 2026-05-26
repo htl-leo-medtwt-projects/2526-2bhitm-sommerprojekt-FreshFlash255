@@ -16,19 +16,31 @@ function updateGeneratingPower() {
 }
 
 function calculateGpuTotal() {
-    const inventory = PLAYER.rackInventory || PLAYER.graphicCardsInventory || {};
+    const rackInventory = PLAYER.rackInventory;
     let power = 0;
     let energyUse = 0;
 
-    Object.entries(inventory).forEach(([id, count]) => {
-        const amount = Number(count) || 0;
-        const gpu = DATA.graphicCards[id];
-        if (!gpu || amount <= 0) {
+    const accumulate = (bucket) => {
+        if (!bucket || typeof bucket !== 'object') {
             return;
         }
-        power += gpu.power * amount;
-        energyUse += gpu.energyUse * amount;
-    });
+        Object.entries(bucket).forEach(([id, count]) => {
+            const amount = Number(count) || 0;
+            const gpu = DATA.graphicCards[id];
+            if (!gpu || amount <= 0) {
+                return;
+            }
+            power += gpu.power * amount;
+            energyUse += gpu.energyUse * amount;
+        });
+    };
+
+    if (Array.isArray(rackInventory)) {
+        rackInventory.forEach((rack) => accumulate(rack));
+    } else {
+        const inventory = rackInventory || PLAYER.graphicCardsInventory || {};
+        accumulate(inventory);
+    }
 
     return { power, energyUse };
 }

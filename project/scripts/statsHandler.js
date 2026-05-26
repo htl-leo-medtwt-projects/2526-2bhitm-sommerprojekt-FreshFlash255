@@ -153,6 +153,9 @@ function sumCounts(bucket) {
 	if (!bucket || typeof bucket !== 'object') {
 		return 0;
 	}
+	if (Array.isArray(bucket)) {
+		return bucket.reduce((total, entry) => total + sumCounts(entry), 0);
+	}
 	return Object.values(bucket).reduce((total, value) => total + (Number(value) || 0), 0);
 }
 

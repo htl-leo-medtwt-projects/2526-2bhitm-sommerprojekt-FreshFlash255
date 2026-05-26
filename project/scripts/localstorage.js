@@ -123,6 +123,28 @@ function sanitizeRackInventory(rackInventory, allowedIds, rackCount) {
 	return result;
 }
 
+function getRackUnlockSnapshot() {
+	if (typeof DATA === 'undefined' || !DATA || !Array.isArray(DATA.racks)) {
+		return [];
+	}
+	return DATA.racks.map((rack) => Boolean(rack && rack.unlocked));
+}
+
+function applyRackUnlockSnapshot(unlocks) {
+	if (!Array.isArray(unlocks) || typeof DATA === 'undefined' || !DATA || !Array.isArray(DATA.racks)) {
+		return;
+	}
+	DATA.racks.forEach((rack, index) => {
+		if (!rack || typeof rack !== 'object') {
+			return;
+		}
+		const value = unlocks[index];
+		if (typeof value === 'boolean') {
+			rack.unlocked = value;
+		}
+	});
+}
+
 function getAllowedIdSet(source) {
 	if (!source || typeof source !== 'object') {
 		return new Set();
@@ -168,6 +190,9 @@ function loadPlayerFromLocalStorage() {
 	if (parsed.rackInventory) {
 		PLAYER.rackInventory = sanitizeRackInventory(parsed.rackInventory, gpuIds, getRackCount());
 	}
+	if (parsed.rackUnlocks) {
+		applyRackUnlockSnapshot(parsed.rackUnlocks);
+	}
 	if (parsed.energySupply) {
 		PLAYER.energySupply = sanitizeInventoryBucket(parsed.energySupply, energyIds);
 	}
@@ -200,6 +225,7 @@ function getPlayerSnapshot() {
 
 	snapshot.graphicCardsInventory = sanitizeInventoryBucket(PLAYER.graphicCardsInventory, gpuIds);
 	snapshot.rackInventory = sanitizeRackInventory(PLAYER.rackInventory, gpuIds, getRackCount());
+	snapshot.rackUnlocks = getRackUnlockSnapshot();
 	snapshot.energySupply = sanitizeInventoryBucket(PLAYER.energySupply, energyIds);
 	return snapshot;
 }
@@ -222,6 +248,20 @@ function savePlayerToLocalStorage(force = false) {
 	} catch (error) {
 		console.warn('Failed to save player data to localStorage', error);
 	}
+}
+
+function clearGameLocalStorage() {
+	if (typeof localStorage === 'undefined') {
+		return;
+	}
+	try {
+		localStorage.removeItem(STATS_STORAGE_KEY);
+		localStorage.removeItem(PLAYER_STORAGE_KEY);
+	} catch (error) {
+		console.warn('Failed to clear localStorage', error);
+	}
+	lastStatsSave = 0;
+	lastPlayerSave = 0;
 }
 loadStatsFromLocalStorage();
 loadPlayerFromLocalStorage();
