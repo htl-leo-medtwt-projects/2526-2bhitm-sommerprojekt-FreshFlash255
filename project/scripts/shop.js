@@ -65,6 +65,53 @@ function buyEnergySupply(id) {
 	return true;
 }
 
+function positionShopDetails(img, details) {
+	const rect = img.getBoundingClientRect();
+	const margin = 12;
+	details.style.display = 'block';
+	details.style.visibility = 'hidden';
+	const detailsRect = details.getBoundingClientRect();
+	let left = rect.right + margin;
+	if (left + detailsRect.width > window.innerWidth) {
+		left = rect.left - detailsRect.width - margin;
+	}
+	if (left < margin) {
+		left = margin;
+	}
+	let top = rect.top;
+	if (top + detailsRect.height > window.innerHeight - margin) {
+		top = window.innerHeight - detailsRect.height - margin;
+	}
+	if (top < margin) {
+		top = margin;
+	}
+	details.style.left = `${Math.round(left)}px`;
+	details.style.top = `${Math.round(top)}px`;
+	details.style.visibility = 'visible';
+}
+
+function attachShopHover(container) {
+	if (!container) {
+		return;
+	}
+	const items = container.querySelectorAll('.shopItem');
+	items.forEach((item) => {
+		const img = item.querySelector('img');
+		const details = item.nextElementSibling;
+		if (!img || !details || !details.classList.contains('shopDetails')) {
+			return;
+		}
+		const showDetails = () => positionShopDetails(img, details);
+		const hideDetails = () => {
+			details.style.display = 'none';
+		};
+		img.addEventListener('mouseenter', showDetails);
+		img.addEventListener('mouseleave', hideDetails);
+		img.addEventListener('focus', showDetails);
+		img.addEventListener('blur', hideDetails);
+	});
+}
+
 function loadShop() {
 	const shopContainer = SCREENS.pcScreen.shop;
 	if (!shopContainer) {
@@ -78,13 +125,22 @@ function loadShop() {
 			<img src="${gpu.img}">
 			<div class="shopItemInfo">
 				<div class="shopItemName">${gpu.name}</div>
-				<div class="shopItemPrice"><strong>Price:</strong> $${gpu.price}</div>
+				<div class="shopItemPrice"><strong>Price:</strong> $${formatCompactMoney(gpu.price)}</div>
 				<div class="shopBtn" onclick="buyGpu('${id}')">Buy</div>
 			</div>
+		</div>
+
+		<div class="shopDetails" style="display: none;">
+			<span class="shopItemDetailName">Name: ${gpu.name}</span>
+			<span class="shopItemDetailPrice">Price: ${formatCompactMoney(gpu.price)}</span>
+			<span class="shopItemDetailPower">Power: ${gpu.power}</span>
+			<span class="shopItemDetailEnergyUse">Energy Use: ${gpu.energyUse}</span>
+			<span class="shopItemDetailDesc">Description${gpu.description}</span>
 		</div>
 		`;
 	});
 	shopContainer.innerHTML = tempString;
+	attachShopHover(shopContainer);
 }
 
 function loadEnergyShop() {
@@ -101,11 +157,20 @@ function loadEnergyShop() {
 			<img src="${energyImg}" onerror="this.src='img/energy.png'">
 			<div class="shopItemInfo">
 				<div class="shopItemName">${source.name}</div>
-				<div class="shopItemPrice"><strong>Price:</strong> $${source.price}</div>
+				<div class="shopItemPrice"><strong>Price:</strong> $${formatCompactMoney(source.price)}</div>
 				<div class="shopBtn" onclick="buyEnergySupply('${id}')">Buy</div>
 			</div>
+		</div>
+
+		<div class="shopDetails" style="display: none;">
+			<span class="energyItemDetailName">Name: ${source.name}</span>
+			<span class="energyItemDetailPrice">Price: ${formatCompactMoney(source.price)}</span>
+			<span class="energyItemDetailOutput">Energy: ${source.output}</span>
+			<span class="energyItemDetailUpKeep">Cost: ${source.energyUse}</span>
+			<span class="energyItemDetailDesc">Description: ${source.description}</span>
 		</div>
 		`;
 	});
 	energyShopContainer.innerHTML = tempString;
+	attachShopHover(energyShopContainer);
 }

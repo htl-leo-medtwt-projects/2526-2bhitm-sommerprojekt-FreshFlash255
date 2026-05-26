@@ -415,6 +415,32 @@ body {
   color: #cfcfcf;
 }
 
+.shopDetails {
+  position: fixed;
+  z-index: 2000;
+  display: none;
+  max-width: 16rem;
+  padding: 0.5rem 0.75rem;
+  background: #1b1b1b;
+  border: 1px solid #3a3a3a;
+  border-radius: 0.5rem;
+  color: #e6e6e6;
+  font-size: 12px;
+  line-height: 1.4;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+
+.shopDetails span {
+  display: block;
+}
+
+.shopDetails span:first-child {
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.25rem;
+}
+
 .shopBtn {
   display: grid;
   place-items: center;

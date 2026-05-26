@@ -132,7 +132,18 @@ function pushBtcRatePoint(value) {
 }
 
 function formatBtc(value) {
-	return Number(value || 0).toFixed(4);
+	const amount = Number(value) || 0;
+	const absAmount = Math.abs(amount);
+	if (absAmount >= 100) {
+		return amount.toFixed(0);
+	}
+	if (absAmount >= 10) {
+		return amount.toFixed(1);
+	}
+	if (absAmount >= 1) {
+		return amount.toFixed(2);
+	}
+	return amount.toFixed(4);
 }
 
 function formatPlayTime(time) {
@@ -152,6 +163,10 @@ function formatCompactMoney(value) {
 	const absAmount = Math.abs(amount);
 	const sign = amount < 0 ? '-' : '';
 	const trimTrailingZero = (formatted) => formatted.replace(/\.0$/, '');
+	if (absAmount >= 1_000_000_000) {
+		const scaled = trimTrailingZero((absAmount / 1_000_000_000).toFixed(1));
+		return `${sign}${scaled}b`;
+	}
 	if (absAmount >= 1_000_000) {
 		const scaled = trimTrailingZero((absAmount / 1_000_000).toFixed(1));
 		return `${sign}${scaled}m`;
