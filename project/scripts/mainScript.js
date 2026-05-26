@@ -22,7 +22,7 @@ function startGameLoop() {
     if (gameLoopId !== null) {
         return;
     }
-    gameLoopId = setInterval(gameLoop(), GAME_LOOP_INTERVAL);
+    gameLoopId = setInterval(gameLoop, GAME_LOOP_INTERVAL);
 }
 
 function stopGameLoop() {
