@@ -2,7 +2,7 @@ let PLAYER = {
     bitcoin: 0,
     money: 200,
     graphicCardsInventory: {},
-    rackInventory: {},
+    rackInventory: [ {}, {}, {}, {}, ],
     generatingPower: 0,
     energySupply: {},
     energy: 0,

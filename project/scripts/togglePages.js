@@ -123,11 +123,14 @@ function startGame() {
 function endGame() {}
 
 // === Inventory Screen ===
-function openInventory() {
+function openInventory(rackIndex) {
     hideAllScreens();
     SCREENS.inventoryScreen.style.display = "grid";
     if (SCREENS.backButtonInventory) {
         SCREENS.backButtonInventory.style.display = 'block';
+    }
+    if (typeof setActiveRackIndex === 'function') {
+        setActiveRackIndex(rackIndex);
     }
     renderInventory();
 }

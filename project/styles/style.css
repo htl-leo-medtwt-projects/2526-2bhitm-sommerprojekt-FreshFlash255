@@ -197,9 +197,11 @@ body {
 }
 
 .rackClip img {
-  width: 450%;
+  margin-left: 0.9rem;
+  width: 400%;
   display: block;
   transition: all 0.3s ease-in-out;
+  overflow: visible;
 }
 
 .rackClip:hover img {

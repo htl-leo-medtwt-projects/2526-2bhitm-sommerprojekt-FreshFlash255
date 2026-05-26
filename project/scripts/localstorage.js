@@ -103,6 +103,35 @@ function sanitizeInventoryBucket(bucket, allowedIds) {
 	return result;
 }
 
+function getRackCount() {
+	if (typeof DATA !== 'undefined' && DATA && Array.isArray(DATA.racks)) {
+		return DATA.racks.length;
+	}
+	if (typeof PLAYER !== 'undefined' && PLAYER && Array.isArray(PLAYER.rackInventory)) {
+		return PLAYER.rackInventory.length;
+	}
+	return 0;
+}
+
+function sanitizeRackInventory(rackInventory, allowedIds, rackCount) {
+	const result = [];
+	if (!allowedIds) {
+		return result;
+	}
+	const targetCount = Number.isFinite(rackCount) && rackCount > 0
+		? rackCount
+		: (Array.isArray(rackInventory) ? rackInventory.length : 1);
+
+	for (let i = 0; i < targetCount; i += 1) {
+		const bucket = Array.isArray(rackInventory)
+			? rackInventory[i]
+			: (i === 0 ? rackInventory : null);
+		result[i] = sanitizeInventoryBucket(bucket, allowedIds);
+	}
+
+	return result;
+}
+
 function getAllowedIdSet(source) {
 	if (!source || typeof source !== 'object') {
 		return new Set();
@@ -146,7 +175,7 @@ function loadPlayerFromLocalStorage() {
 		PLAYER.graphicCardsInventory = sanitizeInventoryBucket(parsed.graphicCardsInventory, gpuIds);
 	}
 	if (parsed.rackInventory) {
-		PLAYER.rackInventory = sanitizeInventoryBucket(parsed.rackInventory, gpuIds);
+		PLAYER.rackInventory = sanitizeRackInventory(parsed.rackInventory, gpuIds, getRackCount());
 	}
 	if (parsed.energySupply) {
 		PLAYER.energySupply = sanitizeInventoryBucket(parsed.energySupply, energyIds);
@@ -179,7 +208,7 @@ function getPlayerSnapshot() {
 	const energyIds = getAllowedIdSet(typeof DATA !== 'undefined' ? DATA.energySupply : null);
 
 	snapshot.graphicCardsInventory = sanitizeInventoryBucket(PLAYER.graphicCardsInventory, gpuIds);
-	snapshot.rackInventory = sanitizeInventoryBucket(PLAYER.rackInventory, gpuIds);
+	snapshot.rackInventory = sanitizeRackInventory(PLAYER.rackInventory, gpuIds, getRackCount());
 	snapshot.energySupply = sanitizeInventoryBucket(PLAYER.energySupply, energyIds);
 	return snapshot;
 }
