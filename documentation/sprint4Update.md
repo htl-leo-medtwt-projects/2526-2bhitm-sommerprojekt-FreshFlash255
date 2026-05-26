@@ -16,4 +16,4 @@
 - Pause Menü
 - Settings Menü(z.B. Toggle für offline einnahmen)
 - Sounddesign
-- Rack Logik fertigmachen
+- Rack Logik fertigmachen(Boosts, max capacity upgraden)

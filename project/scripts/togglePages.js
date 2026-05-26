@@ -1,5 +1,6 @@
 /// <reference path="mainScript.js" />
 /// <reference path="balanceHandler.js" />
+/// <reference path="racks.js" />
 
 const SCREENS = {
     startScreen: document.getElementById('startScreen'),

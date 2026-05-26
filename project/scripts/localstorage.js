@@ -1,6 +1,7 @@
 /// <reference path="../data/gameData.js" />
 /// <reference path="statsHandler.js" />
 /// <reference path="inventoryScript.js" />
+/// <reference path="racks.js" />
 
 const STATS_STORAGE_KEY = 'minemaster_stats_v1';
 const PLAYER_STORAGE_KEY = 'minemaster_player_v1';
@@ -101,16 +102,6 @@ function sanitizeInventoryBucket(bucket, allowedIds) {
 		}
 	});
 	return result;
-}
-
-function getRackCount() {
-	if (typeof DATA !== 'undefined' && DATA && Array.isArray(DATA.racks)) {
-		return DATA.racks.length;
-	}
-	if (typeof PLAYER !== 'undefined' && PLAYER && Array.isArray(PLAYER.rackInventory)) {
-		return PLAYER.rackInventory.length;
-	}
-	return 0;
 }
 
 function sanitizeRackInventory(rackInventory, allowedIds, rackCount) {
