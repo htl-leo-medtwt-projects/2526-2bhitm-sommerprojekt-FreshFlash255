@@ -265,3 +265,9 @@ function clearGameLocalStorage() {
 }
 loadStatsFromLocalStorage();
 loadPlayerFromLocalStorage();
+document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden") {
+        saveStatsToLocalStorage(true);
+		savePlayerToLocalStorage(true);
+    }
+});

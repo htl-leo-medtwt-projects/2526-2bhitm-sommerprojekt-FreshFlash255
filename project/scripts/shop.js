@@ -136,7 +136,7 @@ function loadShop() {
 			<span class="shopItemDetailPrice">Price: ${formatCompactMoney(gpu.price)}</span>
 			<span class="shopItemDetailPower">Power: ${gpu.power}</span>
 			<span class="shopItemDetailEnergyUse">Energy Use: ${gpu.energyUse}</span>
-			<span class="shopItemDetailDesc">Description${gpu.description}</span>
+			<span class="shopItemDetailDesc">Description: ${gpu.description}</span>
 		</div>
 		`;
 	});
