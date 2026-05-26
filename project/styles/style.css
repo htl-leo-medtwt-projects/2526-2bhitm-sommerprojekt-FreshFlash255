@@ -185,15 +185,24 @@ body {
   bottom: 2%;
   left: 30%;
   width: 40%;
+  display: flex;
+  align-items: flex-end;
+  gap: 2%;
 }
 
-.rackContainer img {
-  width: 100%;
+.rackClip {
+  flex: 1;
+  overflow: hidden;
   cursor: pointer;
+}
+
+.rackClip img {
+  width: 450%;
+  display: block;
   transition: all 0.3s ease-in-out;
 }
 
-.rackContainer img:hover {
+.rackClip:hover img {
   filter: drop-shadow(0 0 0.625rem rgba(206, 255, 168, 0.899));
 }
 

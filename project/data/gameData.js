@@ -128,21 +128,25 @@ let DATA = {
             price: 0,
             multiplier: 1.00,
             capacity: 5,
+            unlocked: true,
         },
         {
             price: 10_000,
             multiplier: 1.00,
             capacity: 5,
+            unlocked: false,
         },
         {
             price: 90_000,
             multiplier: 1.00,
             capacity: 5,
+            unlocked: false,
         },
         {
             price: 1_000_000,
             multiplier: 1.00,
             capacity: 5,
+            unlocked: false,
         }
     ]
 }
