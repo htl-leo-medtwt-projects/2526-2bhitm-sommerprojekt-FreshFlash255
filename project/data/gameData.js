@@ -49,6 +49,14 @@ let DATA = {
             energyUse: 12,
             description: "Top tier output with high power draw.",
             img: "img/gpu/gpu5.png"
+        },
+        gigaMegaGpu: {
+            name: "Giga Mega Gpu",
+            price: 200_000_000,
+            power: 4_000,
+            energyUse: 10_000,
+            description: "Giga tier output with otherworldly high power draw.",
+            img: "img/gpu/gpu6.png"
         }
     },
     energySupply: {

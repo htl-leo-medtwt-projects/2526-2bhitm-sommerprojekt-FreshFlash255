@@ -10,6 +10,8 @@
 - Ordendliche Racks Logik(Racks Kosten Geld und haben eine max. Kapazität)
 - Verschönerung von Finanzanzeigen
 - Details beim Kauf von Objekten
+- Gpu hinzugefügt + Gpus überarbeitet
+- Powersupply überarbeitet
 
 ## Ziele bis zum nächsten Sprint:
 
