@@ -24,11 +24,17 @@ function playSound(soundPath) {
 
 function setSoundVolume(value) {
     soundVolume = value / 100;
+    if (soundVolume > 0) {
+        oldSoundVolume = soundVolume;
+    }
 }
 
 function setMusicVolume(value) {
     musicVolume = value / 100;
     backgroundMusic.volume = musicVolume;
+    if (musicVolume > 0) {
+        oldMusicVolume = musicVolume;
+    }
 }
 
 function toggleVolume(type) {

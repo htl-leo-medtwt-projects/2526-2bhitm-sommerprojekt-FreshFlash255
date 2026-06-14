@@ -267,6 +267,9 @@ loadStatsFromLocalStorage();
 loadPlayerFromLocalStorage();
 document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "hidden") {
+		if (typeof isAutosaveEnabled === 'function' && !isAutosaveEnabled()) {
+			return;
+		}
         saveStatsToLocalStorage(true);
 		savePlayerToLocalStorage(true);
     }

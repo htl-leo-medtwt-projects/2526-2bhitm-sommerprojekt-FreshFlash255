@@ -110,8 +110,15 @@ function openStartScreen() {
 function openSettings() {
     hideAllScreens();
     SCREENS.settingsScreen.style.display = "flex";
+    if (typeof syncSettingsMenu === 'function') {
+        syncSettingsMenu();
+    }
 }
-function saveSettings() {}
+function saveSettings() {
+    if (typeof saveGameFromSettings === 'function') {
+        saveGameFromSettings();
+    }
+}
 
 // === Tutorial Screen ===
 function openTutorial() {
@@ -136,6 +143,9 @@ function openPauseMenu() {
     pauseMenuIsOpen = true;
     SCREENS.pauseMenu.style.display = 'flex';
     SCREENS.pauseMenu.setAttribute('aria-hidden', 'false');
+    if (typeof syncSettingsMenu === 'function') {
+        syncSettingsMenu();
+    }
     if (typeof stopGameLoop === 'function') {
         stopGameLoop();
     }
@@ -155,12 +165,20 @@ function closePauseMenu(shouldResumeGame = true) {
 
 function setPauseSoundVolume(value) {
     setSoundVolume(value);
-    updatePauseMuteButton('pauseSoundMuteButton', Number(value) === 0);
+    if (typeof syncSettingsMenu === 'function') {
+        syncSettingsMenu();
+    } else {
+        updatePauseMuteButton('pauseSoundMuteButton', Number(value) === 0);
+    }
 }
 
 function setPauseMusicVolume(value) {
     setMusicVolume(value);
-    updatePauseMuteButton('pauseMusicMuteButton', Number(value) === 0);
+    if (typeof syncSettingsMenu === 'function') {
+        syncSettingsMenu();
+    } else {
+        updatePauseMuteButton('pauseMusicMuteButton', Number(value) === 0);
+    }
 }
 
 function updatePauseMuteButton(buttonId, isMuted) {
@@ -174,13 +192,21 @@ function updatePauseMuteButton(buttonId, isMuted) {
 function togglePauseSoundMute() {
     const soundRange = document.getElementById('pauseSoundRange');
     soundRange.value = toggleVolume('sound');
-    updatePauseMuteButton('pauseSoundMuteButton', Number(soundRange.value) === 0);
+    if (typeof syncSettingsMenu === 'function') {
+        syncSettingsMenu();
+    } else {
+        updatePauseMuteButton('pauseSoundMuteButton', Number(soundRange.value) === 0);
+    }
 }
 
 function togglePauseMusicMute() {
     const musicRange = document.getElementById('pauseMusicRange');
     musicRange.value = toggleVolume('music');
-    updatePauseMuteButton('pauseMusicMuteButton', Number(musicRange.value) === 0);
+    if (typeof syncSettingsMenu === 'function') {
+        syncSettingsMenu();
+    } else {
+        updatePauseMuteButton('pauseMusicMuteButton', Number(musicRange.value) === 0);
+    }
 }
 
 function saveGameFromPauseMenu() {

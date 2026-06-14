@@ -5,6 +5,9 @@
 
 let SETTINGS = {
     volume: 100,
+    soundVolume: 100,
+    musicVolume: 100,
+    autosave: true,
 }
 
 const GAME_LOOP_INTERVAL = 1000;
