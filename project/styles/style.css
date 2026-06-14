@@ -59,7 +59,8 @@ body {
   font-size: 1.3rem;
   right: 5%;
   top: 5%;
-  filter: drop-shadow(black 5px 4px 10px);
+  color: #eaeaea;
+  filter: drop-shadow(black 7px 2px 7px);
 }
 
 .energyDisplay.isNegative {
@@ -296,6 +297,7 @@ body {
   border-radius: 0;
   box-shadow: none;
   isolation: isolate;
+  overflow: visible;
 }
 
 .pauseMenuPanel::before {
@@ -305,11 +307,11 @@ body {
   top: 50%;
   z-index: 0;
   width: 100%;
+  height: 42rem;
   aspect-ratio: 1536 / 1024;
   transform: translate(-50%, -50%);
   background-image: url('../img/menuBg2.png');
-  background-size: 100% 130%;
-  background-overflow: visible;
+  background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
   pointer-events: none;
@@ -602,13 +604,15 @@ body {
   flex-direction: row;
   position: relative;
   left: 25.39%;
-  top: -2.9%;
+  top: -7%;
   background-image: url('../img/bg/pcBg.png');
   background-size: cover;
   background-position: center;
-  width: 55%;
-  height: 60%;
+  width: 45.7%;
+  height: 52%;
   padding: 1rem;
+  overflow-y: scroll;
+  scrollbar-width: none;
 }
 
 .sidebar {
