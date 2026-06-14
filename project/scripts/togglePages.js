@@ -110,9 +110,15 @@ function openStartScreen() {
 function openSettings() {
     hideAllScreens();
     SCREENS.settingsScreen.style.display = "flex";
+    if (SCREENS.backButtonSettings) {
+        SCREENS.backButtonSettings.style.display = 'block';
+    }
     if (typeof syncSettingsMenu === 'function') {
         syncSettingsMenu();
     }
+}
+function closeSettings() {
+    openStartScreen();
 }
 function saveSettings() {
     if (typeof saveGameFromSettings === 'function') {
@@ -124,6 +130,12 @@ function saveSettings() {
 function openTutorial() {
     hideAllScreens();
     SCREENS.tutorialScreen.style.display = "flex";
+    if (SCREENS.backButtonTutorial) {
+        SCREENS.backButtonTutorial.style.display = 'block';
+    }
+}
+function closeTutorial() {
+    openStartScreen();
 }
 
 // === Game Screen ===
