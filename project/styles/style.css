@@ -155,6 +155,7 @@ body {
 }
 
 .gameScreen {
+    position: relative;
     display: flex;
     justify-content: center;
     background-image: url('../img/bg/bg3.png');
@@ -164,6 +165,284 @@ body {
     background-attachment: fixed;
     overflow-x: scroll;
     scrollbar-width: none;
+}
+
+.gamePauseButton {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 60;
+  width: clamp(3.25rem, 5vw, 5rem);
+  aspect-ratio: 1;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  image-rendering: pixelated;
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+
+.gamePauseButton:hover {
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 0.5rem rgba(245, 174, 65, 0.85));
+}
+
+.gamePauseButton img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.pauseMenu {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(18, 10, 3, 0.66);
+  backdrop-filter: blur(0.1875rem);
+}
+
+.pauseMenuPanel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.45rem, 1vw, 0.8rem);
+  width: min(92vw, 32rem);
+  min-height: 28rem;
+  padding: 3.6rem 2rem 1.55rem;
+  box-sizing: border-box;
+  color: #ffffff;
+  background:
+    linear-gradient(180deg, rgb(134, 82, 24) 0%, rgb(114, 68, 16) 48%, rgb(66, 38, 9) 100%);
+  border: 0.32rem solid rgb(178, 118, 38);
+  border-radius: 1.4rem;
+  box-shadow:
+    inset 0 0.35rem 0 rgba(255, 203, 112, 0.22),
+    inset 0 -0.45rem 0 rgba(0, 0, 0, 0.38),
+    0 0.55rem 0 #160d09,
+    0 1.1rem 1.6rem rgba(0, 0, 0, 0.45);
+}
+
+.pauseMenuPanel::before {
+  content: "";
+  position: absolute;
+  top: -1.15rem;
+  left: 50%;
+  width: 62%;
+  height: 3.6rem;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, rgb(151, 91, 23) 0%, rgb(94, 52, 12) 100%);
+  border: 0.28rem solid rgb(190, 132, 46);
+  border-radius: 1.2rem;
+  box-shadow:
+    inset 0 0.25rem 0 rgba(255, 226, 168, 0.38),
+    0 0.35rem 0 #3c2112;
+}
+
+.pauseMenuTitle {
+  position: absolute;
+  top: -0.08rem;
+  left: 50%;
+  z-index: 1;
+  transform: translateX(-50%);
+  color: #ffe7a3;
+  font-size: clamp(1rem, 3vw, 1.9rem);
+  line-height: 1;
+  text-transform: uppercase;
+  text-shadow:
+    0 0.16rem 0 #5b2a14,
+    0.12rem 0.12rem 0 #1e1008;
+}
+
+.pauseImageButton {
+  width: min(72%, 18rem);
+  min-height: 4.4rem;
+  border: none;
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  image-rendering: pixelated;
+  box-shadow: none;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.08s ease;
+}
+
+.pauseImageButton:hover {
+  transform: translateY(-0.1rem) scale(1.03);
+  filter: brightness(1.08);
+}
+
+.pauseImageButton:active {
+  transform: translateY(0.25rem);
+  box-shadow: none;
+}
+
+.pausePlayButton {
+  width: min(90%, 24rem);
+  min-height: 7rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  background-image: url('../img/PlayButton.png');
+}
+
+.pauseMenuActions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.35rem;
+  width: min(100%, 18rem);
+  margin-top: 0.2rem;
+}
+
+.pauseMenuActions .pauseImageButton {
+  width: 100%;
+  min-height: 6.2rem;
+  aspect-ratio: 1;
+}
+
+.pauseSaveButton {
+  background-image: url('../img/saveButton.png');
+}
+
+.pauseHomeButton {
+  background-image: url('../img/homeButton.png');
+}
+
+.pauseSliderRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 4.9rem;
+  gap: 0.55rem;
+  align-items: center;
+  width: min(100%, 27rem);
+}
+
+.pauseSlider {
+  position: relative;
+  width: 100%;
+  min-height: 4.15rem;
+  border: 0.18rem solid rgb(38, 21, 5);
+  border-radius: 0.65rem;
+  background: linear-gradient(180deg, rgb(130, 78, 19) 0%, rgb(82, 47, 11) 100%);
+  box-shadow:
+    inset 0 0.22rem 0 rgba(255, 213, 150, 0.22),
+    inset 0 -0.28rem 0 rgba(0, 0, 0, 0.3),
+    0 0.22rem 0 #1f110a;
+  overflow: hidden;
+}
+
+.pauseSliderImage {
+  position: absolute;
+  inset: 0.25rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+}
+
+.pauseSoundSlider .pauseSliderImage {
+  background-image: url('../img/soundSlider.png');
+}
+
+.pauseMusicSlider .pauseSliderImage {
+  background-image: url('../img/musicSlider.png');
+}
+
+.pauseRange {
+  position: absolute;
+  left: 0.85rem;
+  right: 0.85rem;
+  top: 50%;
+  width: calc(100% - 1.7rem);
+  transform: translateY(-50%);
+  accent-color: #d7a348;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.pauseMuteButton {
+  position: relative;
+  width: 4.9rem;
+  aspect-ratio: 1;
+  border: none;
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  cursor: pointer;
+  image-rendering: pixelated;
+  box-shadow: none;
+  transition: transform 0.08s ease, filter 0.08s ease, box-shadow 0.08s ease;
+}
+
+.pauseSoundSlider + .pauseMuteButton {
+  background-image: url('../img/unmuteSoundButton.png');
+}
+
+.pauseMusicSlider + .pauseMuteButton {
+  background-image: url('../img/unmuteMusicButton.png');
+}
+
+.pauseMuteButton:hover {
+  transform: translateY(-0.08rem) scale(1.03);
+  filter: brightness(1.08);
+}
+
+.pauseMuteButton:active {
+  transform: translateY(0.2rem);
+  box-shadow: none;
+}
+
+.pauseMuteButton.isMuted {
+  filter: saturate(0.8);
+}
+
+.pauseSoundSlider + .pauseMuteButton.isMuted {
+  background-image: url('../img/muteSoundButton.png');
+}
+
+.pauseMusicSlider + .pauseMuteButton.isMuted {
+  background-image: url('../img/muteMusicButton.png');
+}
+
+@media (max-width: 42rem) {
+  .pauseMenuPanel {
+    min-height: 26rem;
+    padding-inline: 1.2rem;
+  }
+
+  .pauseImageButton {
+    min-height: 4rem;
+  }
+
+  .pausePlayButton {
+    min-height: 5.6rem;
+  }
+
+  .pauseMenuActions {
+    width: min(100%, 15rem);
+    gap: 0.8rem;
+  }
+
+  .pauseMenuActions .pauseImageButton {
+    min-height: 5rem;
+  }
+
+  .pauseSlider {
+    min-height: 3.75rem;
+  }
+
+  .pauseSliderRow {
+    grid-template-columns: minmax(0, 1fr) 4rem;
+    gap: 0.35rem;
+  }
+
+  .pauseMuteButton {
+    width: 4rem;
+  }
 }
 
 .building {

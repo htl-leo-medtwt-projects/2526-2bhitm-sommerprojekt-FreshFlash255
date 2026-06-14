@@ -7,6 +7,7 @@ const SCREENS = {
     settingsScreen: document.getElementById('settingsScreen'),
     tutorialScreen: document.getElementById('tutorialScreen'),
     gameScreen: document.getElementById('gameScreen'),
+    pauseMenu: document.getElementById('pauseMenu'),
     inventoryScreen: document.getElementById('inventoryScreen'),
     backButtonSettings: document.getElementById('backButtonSettings'),
     backButtonTutorial: document.getElementById('backButtonTutorial'),
@@ -34,6 +35,7 @@ const DISPLAY_DATA = {
     dataAll: document.querySelectorAll('.dataWrapper')
 }
 
+let pauseMenuIsOpen = false;
 
 //NUR Funktionsnamen KI Generiert
 // === UI / Navigation ===
@@ -73,6 +75,11 @@ function hideAllScreens() {
     if (SCREENS.pcScreen.backButton) {
         SCREENS.pcScreen.backButton.style.display = 'none';
     }
+    if (SCREENS.pauseMenu) {
+        SCREENS.pauseMenu.style.display = 'none';
+        SCREENS.pauseMenu.setAttribute('aria-hidden', 'true');
+    }
+    pauseMenuIsOpen = false;
 }
 
 // === Loading Screen ===
@@ -118,10 +125,95 @@ function startGame() {
     hideAllScreens()
     SCREENS.gameScreen.style.display = "block"
     startGameLoop();
+    if (typeof playMusic === 'function') {
+        playMusic();
+    }
 }
-// function pauseGame() {}
-// function resumeGame() {}
+function openPauseMenu() {
+    if (!SCREENS.pauseMenu || pauseMenuIsOpen) {
+        return;
+    }
+    pauseMenuIsOpen = true;
+    SCREENS.pauseMenu.style.display = 'flex';
+    SCREENS.pauseMenu.setAttribute('aria-hidden', 'false');
+    if (typeof stopGameLoop === 'function') {
+        stopGameLoop();
+    }
+}
+
+function closePauseMenu(shouldResumeGame = true) {
+    if (!SCREENS.pauseMenu) {
+        return;
+    }
+    pauseMenuIsOpen = false;
+    SCREENS.pauseMenu.style.display = 'none';
+    SCREENS.pauseMenu.setAttribute('aria-hidden', 'true');
+    if (shouldResumeGame && SCREENS.gameScreen && SCREENS.gameScreen.style.display !== 'none' && typeof startGameLoop === 'function') {
+        startGameLoop();
+    }
+}
+
+function setPauseSoundVolume(value) {
+    setSoundVolume(value);
+    updatePauseMuteButton('pauseSoundMuteButton', Number(value) === 0);
+}
+
+function setPauseMusicVolume(value) {
+    setMusicVolume(value);
+    updatePauseMuteButton('pauseMusicMuteButton', Number(value) === 0);
+}
+
+function updatePauseMuteButton(buttonId, isMuted) {
+    const button = document.getElementById(buttonId);
+    if (!button) {
+        return;
+    }
+    button.classList.toggle('isMuted', isMuted);
+}
+
+function togglePauseSoundMute() {
+    const soundRange = document.getElementById('pauseSoundRange');
+    soundRange.value = toggleVolume('sound');
+    updatePauseMuteButton('pauseSoundMuteButton', Number(soundRange.value) === 0);
+}
+
+function togglePauseMusicMute() {
+    const musicRange = document.getElementById('pauseMusicRange');
+    musicRange.value = toggleVolume('music');
+    updatePauseMuteButton('pauseMusicMuteButton', Number(musicRange.value) === 0);
+}
+
+function saveGameFromPauseMenu() {
+    if (typeof saveStatsToLocalStorage === 'function') {
+        saveStatsToLocalStorage(true);
+    }
+    if (typeof savePlayerToLocalStorage === 'function') {
+        savePlayerToLocalStorage(true);
+    }
+}
+
+function goHomeFromPauseMenu() {
+    closePauseMenu(false);
+    if (typeof stopGameLoop === 'function') {
+        stopGameLoop();
+    }
+    if (typeof stopMusic === 'function') {
+        stopMusic();
+    }
+    openStartScreen();
+}
 function endGame() {}
+
+document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') {
+        return;
+    }
+    if (pauseMenuIsOpen) {
+        closePauseMenu();
+    } else if (SCREENS.gameScreen && SCREENS.gameScreen.style.display !== 'none') {
+        openPauseMenu();
+    }
+});
 
 // === Inventory Screen ===
 function openInventory(rackIndex) {
