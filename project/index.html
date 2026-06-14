@@ -59,10 +59,10 @@
                 <div class="pauseMenuActions">
                     <button class="pauseImageButton pauseSaveButton" type="button" onclick="saveSettings()" aria-label="Speichern"></button>
                 </div>
-                <div class="pauseSliderRow">
-                    <div>Autosave</div>
-                    <label for="settingsAutosaveToggle">
-                        <input id="settingsAutosaveToggle" type="checkbox" checked onchange="toggleAutosaveSetting(this.checked)">
+                <div class="settingsAutosaveRow">
+                    <span class="settingsAutosaveLabel">Autosave</span>
+                    <label class="autosaveToggle">
+                        <input id="settingsAutosaveToggle" type="checkbox" checked onchange="toggleAutosaveSetting(this.checked)" aria-label="Autosave">
                     </label>
                 </div>
             </div>

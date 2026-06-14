@@ -101,15 +101,11 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-    align-items: center;
   min-height: 100vh;
     width: 100%;
   padding: 5rem 1rem 2rem;
   box-sizing: border-box;
-  background:
-    radial-gradient(circle at top, rgba(255, 178, 80, 0.12), transparent 30%),
-    linear-gradient(rgba(18, 10, 3, 0.72), rgba(18, 10, 3, 0.72)),
-    url('../img/bg/bg3.png');
+  background-image: url('../img/bg/bg3.png');
   background-position: center;
   background-size: cover;
   background-attachment: fixed;
@@ -165,13 +161,14 @@ body {
 .settingsWrapper {
   display: flex;
   justify-content: center;
-  width: min(92vw, 32rem);
+  width: min(94vw, 46rem);
   margin-bottom: 1rem;
 }
 
 .settingsWrapper .pauseMenuPanel {
   width: 100%;
-  min-height: auto;
+  height: auto;
+  padding: 1.5rem 1rem;
 }
 
 .settingsWrapper .pauseMenuPanel > div {
@@ -184,26 +181,48 @@ body {
   justify-content: space-between;
   gap: 1rem;
   width: min(100%, 27rem);
-  padding: 0.9rem 1rem;
-  box-sizing: border-box;
-  border: 0.18rem solid rgb(38, 21, 5);
-  border-radius: 0.65rem;
-  background: linear-gradient(180deg, rgb(130, 78, 19) 0%, rgb(82, 47, 11) 100%);
-  box-shadow:
-    inset 0 0.22rem 0 rgba(255, 213, 150, 0.22),
-    inset 0 -0.28rem 0 rgba(0, 0, 0, 0.3),
-    0 0.22rem 0 #1f110a;
   color: #fff2cc;
   font-size: clamp(0.9rem, 2vw, 1.2rem);
   text-transform: uppercase;
 }
 
-.settingsAutosaveRow input[type="checkbox"] {
-  width: 1.35rem;
-  height: 1.35rem;
-  margin: 0;
-  accent-color: #d7a348;
+.autosaveToggle {
+  display: inline-flex;
   cursor: pointer;
+}
+
+.autosaveToggle input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 2.4rem;
+  height: 2.4rem;
+  margin: 0;
+  border: 0.42rem solid rgb(66, 38, 9);
+  border-radius: 0.3rem;
+  background-color: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.12s ease, transform 0.08s ease, filter 0.12s ease;
+  image-rendering: pixelated;
+  box-shadow:
+    inset 0 0 0 0.08rem rgba(255, 213, 150, 0.12),
+    0 0.18rem 0 #1f110a;
+}
+
+.autosaveToggle input[type="checkbox"]:checked {
+  background-color: rgb(130, 78, 19);
+  box-shadow:
+    inset 0 0.35rem 0 rgba(255, 213, 150, 0.35),
+    inset 0 -0.2rem 0 rgba(0, 0, 0, 0.28),
+    0 0.18rem 0 #1f110a;
+}
+
+.autosaveToggle input[type="checkbox"]:hover {
+  filter: brightness(1.1);
+}
+
+.autosaveToggle input[type="checkbox"]:active {
+  transform: scale(0.94);
 }
 
 .settingsWrapper .pauseMenuActions {
@@ -267,44 +286,48 @@ body {
   flex-direction: column;
   align-items: center;
   gap: clamp(0.45rem, 1vw, 0.8rem);
-  width: min(92vw, 32rem);
-  min-height: 28rem;
-  padding: 3.6rem 2rem 1.55rem;
+  width: min(94vw, 46rem);
+  min-height: auto;
+  padding: 1.5rem 1rem;
   box-sizing: border-box;
   color: #ffffff;
-  background:
-    linear-gradient(180deg, rgb(134, 82, 24) 0%, rgb(114, 68, 16) 48%, rgb(66, 38, 9) 100%);
-  border: 0.32rem solid rgb(178, 118, 38);
-  border-radius: 1.4rem;
-  box-shadow:
-    inset 0 0.35rem 0 rgba(255, 203, 112, 0.22),
-    inset 0 -0.45rem 0 rgba(0, 0, 0, 0.38),
-    0 0.55rem 0 #160d09,
-    0 1.1rem 1.6rem rgba(0, 0, 0, 0.45);
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  isolation: isolate;
 }
 
 .pauseMenuPanel::before {
   content: "";
   position: absolute;
-  top: -1.15rem;
   left: 50%;
-  width: 62%;
-  height: 3.6rem;
-  transform: translateX(-50%);
-  background: linear-gradient(180deg, rgb(151, 91, 23) 0%, rgb(94, 52, 12) 100%);
-  border: 0.28rem solid rgb(190, 132, 46);
-  border-radius: 1.2rem;
-  box-shadow:
-    inset 0 0.25rem 0 rgba(255, 226, 168, 0.38),
-    0 0.35rem 0 #3c2112;
+  top: 50%;
+  z-index: 0;
+  width: 100%;
+  aspect-ratio: 1536 / 1024;
+  transform: translate(-50%, -50%);
+  background-image: url('../img/menuBg2.png');
+  background-size: 100% 130%;
+  background-overflow: visible;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+.pauseMenuPanel > * {
+  position: relative;
+  z-index: 1;
 }
 
 .pauseMenuTitle {
-  position: absolute;
-  top: -0.08rem;
-  left: 50%;
+  position: relative;
+  top: auto;
+  left: auto;
   z-index: 1;
-  transform: translateX(-50%);
+  transform: none;
+  margin: 0 0 0.5rem;
   color: #ffe7a3;
   font-size: clamp(1rem, 3vw, 1.9rem);
   line-height: 1;
@@ -465,9 +488,13 @@ body {
 }
 
 @media (max-width: 42rem) {
+  .settingsWrapper {
+    width: min(94vw, 46rem);
+  }
+
   .pauseMenuPanel {
-    min-height: 26rem;
-    padding-inline: 1.2rem;
+    width: min(94vw, 46rem);
+    padding: 1.5rem 1rem;
   }
 
   .pauseImageButton {
