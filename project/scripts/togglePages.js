@@ -144,7 +144,9 @@ function startGame() {
     hideAllScreens()
     SCREENS.gameScreen.style.display = "block"
     startGameLoop();
-    if (typeof playMusic === 'function') {
+    if (typeof playGameAudio === 'function') {
+        playGameAudio();
+    } else if (typeof playMusic === 'function') {
         playMusic();
     }
 }
@@ -176,7 +178,7 @@ function closePauseMenu(shouldResumeGame = true) {
 }
 
 function setPauseSoundVolume(value) {
-    setSoundVolume(value);
+    setSettingsSoundVolume(value);
     if (typeof syncSettingsMenu === 'function') {
         syncSettingsMenu();
     } else {
@@ -185,7 +187,7 @@ function setPauseSoundVolume(value) {
 }
 
 function setPauseMusicVolume(value) {
-    setMusicVolume(value);
+    setSettingsMusicVolume(value);
     if (typeof syncSettingsMenu === 'function') {
         syncSettingsMenu();
     } else {
@@ -235,7 +237,9 @@ function goHomeFromPauseMenu() {
     if (typeof stopGameLoop === 'function') {
         stopGameLoop();
     }
-    if (typeof stopMusic === 'function') {
+    if (typeof stopGameAudio === 'function') {
+        stopGameAudio();
+    } else if (typeof stopMusic === 'function') {
         stopMusic();
     }
     openStartScreen();

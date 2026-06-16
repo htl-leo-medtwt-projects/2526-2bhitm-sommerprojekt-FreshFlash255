@@ -111,15 +111,15 @@ function applySoundSetting(type, value) {
 	SETTINGS[config.valueKey] = numericValue;
 	SETTINGS.volume = SETTINGS.soundVolume;
 	if (type === 'sound') {
-		setSoundVolume(numericValue);
+		setSettingsSoundVolume(numericValue);
 	} else {
-		setMusicVolume(numericValue);
+		setSettingsMusicVolume(numericValue);
 	}
 	syncVolumeControls(type);
 	saveSettingsToLocalStorage();
 }
 
-function toggleSoundSetting(type) {
+function toggleSettingsSoundSetting(type) {
 	const config = getVolumeElements(type);
 	if (!config) {
 		return;
@@ -137,11 +137,11 @@ function setSettingsMusicVolume(value) {
 }
 
 function toggleSettingsSoundMute() {
-	toggleSoundSetting('sound');
+	toggleSettingsSoundSetting('sound');
 }
 
 function toggleSettingsMusicMute() {
-	toggleSoundSetting('music');
+	toggleSettingsSoundSetting('music');
 }
 
 function setAutosaveEnabled(enabled) {
@@ -169,11 +169,11 @@ function initializeSettings() {
 	if (storedSettings) {
 		Object.assign(SETTINGS, DEFAULT_SETTINGS, storedSettings);
 	}
-	if (typeof setSoundVolume === 'function') {
-		setSoundVolume(SETTINGS.soundVolume);
+	if (typeof setSettingsSoundVolume === 'function') {
+		setSettingsSoundVolume(SETTINGS.soundVolume);
 	}
-	if (typeof setMusicVolume === 'function') {
-		setMusicVolume(SETTINGS.musicVolume);
+	if (typeof setSettingsMusicVolume === 'function') {
+		setSettingsMusicVolume(SETTINGS.musicVolume);
 	}
 	syncSettingsMenu();
 	saveSettingsToLocalStorage();
